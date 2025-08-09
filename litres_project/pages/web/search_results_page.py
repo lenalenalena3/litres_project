@@ -1,11 +1,13 @@
 import allure
 from selene import browser, query, be
+from selenium.common import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
 
 from litres_project.models.book_model import Book
 from litres_project.utils.logging import info_attaching
 
 
-class ListResultsPage:
+class SearchResultsPage:
     def __init__(self):
         self._search_result_elements = browser.all('//*[@data-testid="search__content--wrapper"]/div')
 
@@ -48,3 +50,20 @@ class ListResultsPage:
     def open_info_book(self, index):
         self._search_result_elements.element(index).element('.//a[@data-testid="art__title"]').click()
         return self.get_info_book(index)
+
+    def get_count_result(self):
+        try:
+            WebDriverWait(self, 10).until(
+                lambda _: self._search_result_elements.__len__() > 0
+            )
+            return self._search_result_elements.__len__()
+        except TimeoutException:
+            return 0
+
+    @allure.step("Проверить результат поиска")
+    def should_search_result_name(self, text):
+        with allure.step("Проверить, что количество строк >0"):
+            actual_count = self.get_count_result()
+            assert actual_count > 0
+        with allure.step("Проверить, подходит ли название первого найденного элемента"):
+            assert self.get_name_book(0) == text

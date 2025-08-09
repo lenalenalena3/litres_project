@@ -109,26 +109,9 @@ class MenuPage:
             with check:
                 self._menu_dop_elements.should(have.exact_texts(actual_list_menu_hidden))
 
-    @allure.step("На главной страницу в верхнем в строку поиска ввести {text}")
+    @allure.step("На главной странице в строку поиска ввести {text}")
     def search_text(self, text):
         self._search_input.should(be.visible).type(text).press_enter()
-
-    def get_count_result(self):
-        try:
-            WebDriverWait(self, 10).until(
-                lambda _: self._search_result_elements.__len__() > 0
-            )
-            return self._search_result_elements.__len__()
-        except TimeoutException:
-            return 0
-
-    @allure.step("Проверить результат поиска")
-    def should_search_result_name(self, text):
-        with allure.step("Проверить, что количество строк >0"):
-            actual_count = self.get_count_result()
-            assert actual_count > 0
-        with allure.step("Проверить, подходит ли название первого найденного элемента"):
-            assert self.get_name_book(0) == text
 
     @allure.step("Обновить cookies")
     def refresh_cookies(self, session):
@@ -146,3 +129,18 @@ class MenuPage:
         browser.driver.refresh()
         with allure.step(f"Session Cookies new"):
             cookie_attaching(browser.driver.get_cookies())
+
+    def tab_more_one(self):
+        try:
+            WebDriverWait(browser.driver, 5).until(
+                lambda d: len(d.window_handles) > 1
+            )
+            return True
+        except TimeoutException:
+            return False
+
+    @allure.step("Переключиться на новую вкладку")
+    def switch_tab(self):
+        if self.tab_more_one():
+            current_handles = browser.driver.window_handles
+            browser.driver.switch_to.window(current_handles[-1])
