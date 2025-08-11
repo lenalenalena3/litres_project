@@ -12,7 +12,7 @@ from litres_project.models.book_model import Book
 @allure.severity(Severity.CRITICAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("API: PUT_cart_add: Добавление в козину")
+@allure.title("Личный кабинет: Добавление в корзину")
 @allure.description(
     "Отправить запрос PUT_add_cart -> "
     "В полученном ответе:"
@@ -41,7 +41,7 @@ def test_api_put_cart_add(api_session):
 @allure.severity(Severity.CRITICAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("API: PUT_cart_remove: Удаление из корзины")
+@allure.title("Личный кабинет: Удаление из корзины")
 @allure.description(
     "Отправить запрос PUT_add_cart -> "
     "В полученном ответе:"

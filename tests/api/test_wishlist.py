@@ -13,7 +13,7 @@ from litres_project.utils.logging import book_attaching
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("API: PUT_wishlist: Добавление в список 'Отложено'")
+@allure.title("Личный кабинет: Добавление в список 'Отложено'")
 @allure.description(
     "Отправить запрос PUT_wishlist -> "
     "В полученном ответе:"
@@ -35,7 +35,7 @@ def test_api_put_wishlist(api_session):
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("API: DELETE_wishlist: Удаление из списка 'Отложено'")
+@allure.title("Личный кабинет: Удаление из списка 'Отложено'")
 @allure.description(
     "Отправить запрос DELETE_wishlist -> "
     "В полученном ответе:"
@@ -56,7 +56,7 @@ def test_api_delete_wishlist(api_session_add_wishlist):
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("API: DELETE_wishlist: Удаление из списка 'Отложено' несуществующей книги")
+@allure.title("Личный кабинет: Удаление из списка 'Отложено' несуществующей книги")
 @allure.description(
     "Отправить запрос DELETE_wishlist с несуществующим id-> "
     "В полученном ответе: проверить, что статус код = 404")
