@@ -1,9 +1,11 @@
 import os
 import time
 
+import allure
+import allure_commons
 import requests
 from dotenv import load_dotenv
-from selene import browser
+from selene import browser, support
 from selenium import webdriver
 
 import pytest
@@ -108,12 +110,16 @@ def setup_browser(request):
     browser.config.window_height = 1080
     browser.config.timeout = 5
     browser.config.base_url = BASE_URL
+    browser.config._wait_decorator = support._logging.wait_with(
+        context=allure_commons._allure.StepContext
+    )
     yield browser
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_html(browser)
     attach.add_video(browser, video_url)
-    driver.quit()
+    with allure.step("Закрыть браузер"):
+        driver.quit()
 
 
 @pytest.fixture(params=load_data_json_value('search.json'))

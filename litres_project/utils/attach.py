@@ -1,7 +1,9 @@
 import allure
 from allure_commons.types import AttachmentType
 
-USE_SELENOID=False
+USE_SELENOID = False
+
+
 def add_screenshot(browser):
     png = browser.driver.get_screenshot_as_png()
     allure.attach(body=png, name='screenshot', attachment_type=AttachmentType.PNG, extension='.png')
@@ -22,6 +24,11 @@ def add_logs(browser):
 def add_html(browser):
     html = browser.driver.page_source
     allure.attach(body=html, name='page_source', attachment_type=AttachmentType.HTML, extension='.html')
+
+
+def add_xml(browser):
+    xml = browser.driver.page_source
+    allure.attach(body=xml, name='xml', attachment_type=AttachmentType.XML, extension='.xml')
 
 
 def add_video(browser, url):

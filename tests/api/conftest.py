@@ -1,12 +1,10 @@
-import os
 import time
 
 import pytest
 import requests
 from dotenv import load_dotenv
 
-from litres_project.helpers.helper_api import api_put_wishlist, check_status_code, api_request, api_put_cart_add, \
-    BASE_URL_API
+from litres_project.helpers.helper_api import api_put_wishlist, api_put_cart_add
 from litres_project.models.book_model import Book
 from litres_project.utils.logging import book_attaching
 
