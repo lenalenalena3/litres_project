@@ -23,12 +23,9 @@ class InfoDetailsPage:
         if self.modal_window_visible():
             self._modal_windows_close.click()
 
-    @allure.step("Нажать на кнопку 'Смотреть оглавление'")
-    def show_contents(self):
-        self._contents.should(be.visible).click()
-
     @allure.step("Проверить оглавление")
     def should_contents(self, list_book):
+        self._contents.should(be.visible).click()
         count_list_actual = len(self._list_contents)
         count_list_expected = len(list_book)
         assert count_list_actual == count_list_expected, \

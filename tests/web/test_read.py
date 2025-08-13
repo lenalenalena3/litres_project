@@ -12,7 +12,7 @@ from litres_project.utils.resource import load_data_json
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
 @allure.title("Книжная страница: Просмотр оглавления")
-@allure.description("Открыть главную страницу -> Найти по поиску книгу -> Открыть книгу -> Открыть оглавление -> Проверить оглавление")
+@allure.description("Открыть главную страницу -> Найти по поиску книгу -> Открыть книгу -> Проверить оглавление")
 def test_view_contents(setup_browser):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
@@ -23,8 +23,6 @@ def test_view_contents(setup_browser):
         index_book = 0
         app.search_results_page.open_info_book(index_book)
         app.menu_page.switch_tab()
-    with allure.step("Открыть оглавление"):
-        app.info_details_page.show_contents()
     with allure.step("Проверить оглавление"):
         list_book = load_data_json('contents.json')
         contents = list_book['contents']
