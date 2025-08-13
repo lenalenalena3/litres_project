@@ -15,7 +15,8 @@ from litres_project.models.book_model import Book
 from litres_project.utils import attach
 from litres_project.utils.logging import book_attaching
 from litres_project.utils.resource import load_data_json_value
-from tests.web.config import USE_SELENOID, DEFAULT_SELENOID_URL, DEFAULT_BROWSER_VERSION, DEFAULT_BROWSER_NAME, BASE_URL
+from tests.web import config
+from tests.web.config import USE_SELENOID
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.options import Options
 
@@ -24,19 +25,19 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_name",
         action="store",
-        default="chrome",
+        default=None,
         help="Укажите браузер: chrome или firefox"
     )
     parser.addoption(
         "--browser_version",
         action="store",
-        default="128.0",
+        default=None,
         help="Укажите версию браузера"  # chrome 128.0, 127.0, firefox 124.0, 125.0
     )
     parser.addoption(
         "--selenoid_url",
         action="store",
-        default="selenoid.autotests.cloud",
+        default=None,
         help="URL Selenoid"
     )
 
@@ -51,18 +52,13 @@ def setup_browser(request):
     # Определяем, используется ли Selenoid
     print(f" Selenoid: {USE_SELENOID}")
     video_url = ""
+    selenoid_url = request.config.getoption("--selenoid_url") or config.SELENOID_URL
+    browser_name = request.config.getoption('--browser_name') or config.BROWSER_NAME
+    browser_version = request.config.getoption('--browser_version') or config.BROWSER_VERSION
 
     if USE_SELENOID:
-        browser_name = request.config.getoption('--browser_name')
-        browser_version = request.config.getoption('--browser_version')
-        selenoid_url = request.config.getoption('--selenoid_url')
         print(f"Установленные параметры: {selenoid_url}: {browser_name}:{browser_version}")
-        browser_name = browser_name if browser_name != "" else DEFAULT_BROWSER_NAME
-        browser_version = browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
-        selenoid_url = selenoid_url if selenoid_url != "" else DEFAULT_SELENOID_URL
-
         options = FirefoxOptions() if browser_name.lower() == "firefox" else Options()
-
         selenoid_capabilities = {
             "browserName": browser_name,
             "browserVersion": browser_version,
@@ -98,18 +94,17 @@ def setup_browser(request):
 
         video_url = selenoid_url
     else:
-        print(f"Браузер: {DEFAULT_BROWSER_NAME}")
-        options = FirefoxOptions() if DEFAULT_BROWSER_NAME.lower() == "firefox" else Options()
-        if DEFAULT_BROWSER_NAME.lower() == "firefox":
+        options = FirefoxOptions() if browser_name.lower() == "firefox" else Options()
+        if browser_name.lower() == "firefox":
             options.set_preference("devtools.console.stdout.content", True)
             options.set_preference("browser.console.showInPanel", True)
-        driver = webdriver.Firefox(options=options) if DEFAULT_BROWSER_NAME.lower() == "firefox" else webdriver.Chrome(
+        driver = webdriver.Firefox(options=options) if browser_name.lower() == "firefox" else webdriver.Chrome(
             options=options)
     browser.config.driver = driver
     browser.config.window_width = 1920
     browser.config.window_height = 1080
-    browser.config.timeout = 5
-    browser.config.base_url = BASE_URL
+    browser.config.timeout = float(config.TIMEOUT)
+    browser.config.base_url = config.BASE_URL
     browser.config._wait_decorator = support._logging.wait_with(
         context=allure_commons._allure.StepContext
     )
