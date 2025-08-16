@@ -1,8 +1,6 @@
 import allure
 from allure_commons._allure import step
 from allure_commons.types import Severity
-from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have
 
 from litres_project.pages.application_mobile import app_mobile
 from litres_project.utils.resource import load_data_json

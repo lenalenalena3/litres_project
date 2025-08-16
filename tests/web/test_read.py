@@ -21,9 +21,9 @@ def test_view_contents(setup_browser):
         app.menu_page.search_text(text)
     with allure.step("Открыть книгу"):
         index_book = 0
-        app.search_results_page.open_info_book(index_book)
+        app.search_page.open_info_book(index_book)
         app.menu_page.switch_tab()
     with allure.step("Проверить оглавление"):
         list_book = load_data_json('contents.json')
         contents = list_book['contents']
-        app.info_details_page.should_contents(contents)
+        app.book_page.should_contents(contents)

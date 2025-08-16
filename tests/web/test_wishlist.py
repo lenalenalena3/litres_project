@@ -22,7 +22,7 @@ def test_add_wishlist(setup_browser):
         app.menu_page.search_text(text)
     with allure.step("Добавить книгу в список 'Отложено'"):
         index_book = 0
-        book = app.search_results_page.add_favorite(index_book)
+        book = app.search_page.add_favorite(index_book)
     with allure.step("Проверить список 'Отложено'"):
         app.menu_page.open_my_books()
         app.favorite_page.open_favorite()

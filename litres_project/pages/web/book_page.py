@@ -2,9 +2,10 @@ import allure
 from selene import browser, be, query
 
 
-class InfoDetailsPage:
+class BookPage:
     def __init__(self):
-        self._add_for_cart_button = browser.element('//button[@data-testid="book__addToCartButton"]//div[contains(@class, "textContainer")][text()]')
+        self._add_to_cart_button = browser.element('button[data-testid="book__addToCartButton"]')
+
         self._modal_windows_close = browser.element('//div[@id="dialogDesc"]//parent::div//div[@data-testid="icon_close"]')
         self._contents = browser.element(
             '//div[@data-testid="book__infoAboutBook--wrapper"]//button[@aria-haspopup="dialog"]')
@@ -19,7 +20,7 @@ class InfoDetailsPage:
 
     @allure.step("Нажать на кнопку 'Добавить в корзину'")
     def add_to_cart(self):
-        self._add_for_cart_button.should(be.visible).click()
+        self._add_to_cart_button.should(be.visible).click()
         if self.modal_window_visible():
             self._modal_windows_close.click()
 

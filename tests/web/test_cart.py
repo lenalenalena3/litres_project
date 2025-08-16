@@ -22,9 +22,9 @@ def test_add_cart(setup_browser):
         app.menu_page.search_text(text)
     with allure.step("Добавить книгу в корзину"):
         index_book = 0
-        book = app.search_results_page.open_info_book(index_book)
+        book = app.search_page.open_info_book(index_book)
         app.menu_page.switch_tab()
-        app.info_details_page.add_to_cart()
+        app.book_page.add_to_cart()
     with allure.step("Проверить корзину"):
         app.menu_page.open_cart()
         app.cart_page.should_cart_result_name(1, [book.name])
@@ -53,6 +53,6 @@ def test_del_cart(setup_browser, api_session_add_cart):
         app.cart_page.should_cart_result_id(2, list_book)
     with allure.step("Удалить одну книгу"):
         index_book = 0
-        app.cart_page.del_favorite(index_book)
+        app.cart_page.del_cart(index_book)
     with allure.step("Проверить корзину"):
         app.cart_page.should_cart_result_id(1, [book.id])

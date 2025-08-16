@@ -19,4 +19,4 @@ def test_search(setup_browser, search_data):
     with allure.step("Найти по поиску книгу"):
         app.menu_page.search_text(text)
     with allure.step("Проверить результат поиска"):
-        app.search_results_page.should_search_result_name(text)
+        app.search_page.should_search_result_name(text)

@@ -9,25 +9,22 @@ from litres_project.utils.logging import info_attaching, current_url_attaching, 
 
 class MenuPage:
     def __init__(self):
-        self._menu_elements = browser.element('#lowerMenuWrap').all(
-            './/a[contains(@data-testid,"lowerMenu__item")][@aria-hidden="false"]')
-        self._menu_dop = browser.element('#lowerMenuWrap').element(
-            '//div[contains(@data-testid,"lower-menu__more-button")]/a')
-        self._menu_dop_elements = browser.element('#lowerMenuWrap').all(
-            './/a[contains(@data-testid,"lowerMenu_moreItem")]').all(
-            './/div')
+        self.menu = browser.element('#lowerMenuWrap')
+        self._menu_elements = self.menu.all('.//a[contains(@data-testid,"lowerMenu__item")][@aria-hidden="false"]')
+        self._menu_dop = self.menu.element('.//div[contains(@data-testid,"lower-menu__more-button")]/a')
+        self._menu_dop_elements = self.menu.all('.//a[contains(@data-testid,"lowerMenu_moreItem")]//div')
         self._search = browser.element('//form[@action="/search/"]')
         self._search_input = self._search.element('.//input')
-        self._search_result_elements = browser.all('//*[@data-testid="search__content--wrapper"]/div')
-        self._cart = browser.element('//*[@data-testid="tab-basket"]/a')
-        self._my_books = browser.element('//*[@data-testid="tab-myBooks"]/a')
+        self._search_elements = browser.all('[data-testid="search__content--wrapper"] > div')
+        self._cart = browser.element('[data-testid="tab-basket"] > a')
+        self._my_books = browser.element('[data-testid="tab-myBooks"] > a')
 
     def get_name_book(self, index):
-        return self._search_result_elements.element(index).element('./a').should(be.visible).get(
+        return self._search_elements.element(index).element('./a').should(be.visible).get(
             query.attribute('aria-label'))
 
     def add_favorite(self, index):
-        self._search_result_elements.element(index).element('./a').should(be.visible).get(query.attribute('aria-label'))
+        self._search_elements.element(index).element('./a').should(be.visible).get(query.attribute('aria-label'))
 
     @allure.step("Открыть главную страницу")
     def open_main_page(self):
