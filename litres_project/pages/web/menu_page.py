@@ -10,9 +10,9 @@ from litres_project.utils.logging import info_attaching, current_url_attaching, 
 class MenuPage:
     def __init__(self):
         self.menu = browser.element('#lowerMenuWrap')
-        self._menu_elements = self.menu.all('.//a[contains(@data-testid,"lowerMenu__item")][@aria-hidden="false"]')
-        self._menu_dop = self.menu.element('.//div[contains(@data-testid,"lower-menu__more-button")]/a')
-        self._menu_dop_elements = self.menu.all('.//a[contains(@data-testid,"lowerMenu_moreItem")]//div')
+        self._menu_elements = self.menu.all('[data-testid*="lowerMenu__item"][aria-hidden="false"]')
+        self._menu_dop = self.menu.element('[data-testid*="lower-menu__more-button"] > a')
+        self._menu_dop_elements = self.menu.all('[data-testid*="lowerMenu_moreItem"] > div')
         self._search = browser.element('//form[@action="/search/"]')
         self._search_input = self._search.element('.//input')
         self._search_elements = browser.all('[data-testid="search__content--wrapper"] > div')
