@@ -12,7 +12,7 @@ class CartPage:
     def __init__(self):
         self._cart_list_elements = browser.all('[data-testid*="cart__listItem"]')
         self._cart_favorite_context_menu = browser.element(
-            '//*[@data-testid="cart__modalDeleteArt"]//div[text()="Удалить"]')
+            '//*[@data-testid="cart__modalDeleteArt"]//button')
 
     def get_field_book(self, index, field):
         return self._cart_list_elements.element(index).element(f'[data-testid*="cart__{field}"]').should(

@@ -38,8 +38,7 @@ class SearchPage:
 
     @allure.step("Добавить в избранное товар с индексом {index}")
     def add_favorite(self, index):
-        if self.check_not_favorite(index):
-            self._search_list_elements.element(index).element('.//button').should(be.visible).click()
+        self._search_list_elements.element(index).element('.//button').should(be.visible).click()
         return self.get_info_book(index)
 
     @allure.step("Открыть товар с индексом {index}")

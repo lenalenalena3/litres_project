@@ -14,10 +14,14 @@ text = "Красная корова Барвицкая"
 @allure.tag("regression")
 @allure.title("Личный кабинет: Добавление книги в список 'Отложено'")
 @allure.description(
-    "Открыть главную страницу -> Найти по поиску книгу -> Добавить книгу в список 'Отложено' -> Проверить список 'Отложено'")
+    "Открыть главную страницу -> Проверить, что список 'Отложено' пуст -> Найти по поиску книгу -> Добавить книгу в список 'Отложено' -> Проверить список 'Отложено'")
 def test_add_wishlist(setup_browser):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
+    with allure.step("Проверить, что список 'Отложено' пуст"):
+        app.menu_page.open_my_books()
+        app.favorite_page.open_favorite()
+        app.favorite_page.should_count_result(0)
     with allure.step("Найти по поиску книгу"):
         app.menu_page.search_text(text)
     with allure.step("Добавить книгу в список 'Отложено'"):

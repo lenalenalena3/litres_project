@@ -142,7 +142,6 @@ def api_session_add_wishlist(api_session):
     check_status_code(response2, 204)
     yield api_session, book1, book2
 
-
 @pytest.fixture(scope="function")
 def api_session_add_cart(api_session):
     book1 = Book(id='66924193')
@@ -155,10 +154,3 @@ def api_session_add_cart(api_session):
     response2 = api_put_cart_add(api_session, book2.id)
     check_status_code(response2, 200)
     yield api_session, book1, book2
-
-
-@pytest.fixture(scope="function")
-def api_session():
-    session = requests.Session()
-    yield session
-    session.close()
