@@ -1,6 +1,5 @@
 import allure
 from selene import browser, be, query
-from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
 from litres_project.helpers.helper import extract_book_id
@@ -35,18 +34,14 @@ class CartPage:
         info_attaching(book, "Book")
         return book
 
-    def get_count_result(self):
-        try:
-            WebDriverWait(self, 10).until(
-                lambda _: self._cart_list_elements.__len__() > 0
-            )
-            return self._cart_list_elements.__len__()
-        except TimeoutException:
-            return 0
-
     @allure.step("На странице 'Корзина' проверить количество товаров")
     def should_count_result(self, count_book):
-        actual_count = self.get_count_result()
+        try:
+            WebDriverWait(self, 10).until(
+                lambda _: len(self._cart_list_elements) == count_book
+            )
+        finally:
+            actual_count = len(self._cart_list_elements)
         assert actual_count == count_book, \
             f"Несовпадение: {actual_count} != {count_book}"
 

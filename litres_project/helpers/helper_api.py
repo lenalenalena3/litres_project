@@ -69,7 +69,7 @@ def api_put_cart_remove(session, id_book):
     return response
 
 
-@allure.step("GET: status, check: deferred_count={count}")
+@allure.step("GET: status")
 def api_get_status(session, field, count):
     endpoint = f"/users/me/arts/stats"
     response = api_request(session=session, endpoint=endpoint, method="GET")
@@ -78,8 +78,7 @@ def api_get_status(session, field, count):
     json_data = response.json()
     with allure.step(f"Проверить в response: {field} == {count}"):
         assert json_data['payload']['data'][field] == count, \
-            f"Ожидалось deferred_count={count}, получено {json_data['payload']['data']['cart_stats']['deferred_count']}"
-
+            f"Ожидалось {count}, получено {json_data['payload']['data'][field]}"
 
 @allure.step("POST: folders для {name_folders}")
 def api_post_folders(session, name_folders):

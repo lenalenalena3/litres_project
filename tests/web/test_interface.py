@@ -1,6 +1,5 @@
 import allure
 from allure_commons.types import Severity
-
 from litres_project.pages.application import app
 
 

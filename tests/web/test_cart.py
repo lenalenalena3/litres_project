@@ -1,9 +1,6 @@
 import allure
 from allure_commons.types import Severity
-
 from litres_project.pages.application import app
-
-text = "Красная корова Барвицкая"
 
 
 @allure.epic("WEB")
@@ -14,12 +11,16 @@ text = "Красная корова Барвицкая"
 @allure.tag("smoke", "regression")
 @allure.title("Личный кабинет: Добавление книги в корзину")
 @allure.description(
-    "Открыть главную страницу -> Найти по поиску книгу -> Добавить книгу в корзину -> Проверить корзину")
+    "Открыть главную страницу -> Проверить, что корзина пустая -> Найти по поиску книгу -> Добавить книгу в корзину -> Проверить корзину")
 def test_add_cart(setup_browser):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
+    with allure.step("Проверить, что корзина пустая"):
+        app.menu_page.open_cart()
+        app.cart_page.should_count_result(0)
     with allure.step("Найти по поиску книгу"):
-        app.menu_page.search_text(text)
+        text_search = "Красная корова Барвицкая"
+        app.menu_page.search_text(text_search)
     with allure.step("Добавить книгу в корзину"):
         index_book = 0
         book = app.search_page.open_info_book(index_book)

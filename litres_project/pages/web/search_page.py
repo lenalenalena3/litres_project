@@ -1,6 +1,5 @@
 import allure
 from selene import browser, query, be
-from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
 from litres_project.helpers.helper import extract_book_id
@@ -20,7 +19,8 @@ class SearchPage:
         return self.get_field_text_book(index, 'title')
 
     def get_id_book(self, index):
-        href = self._search_list_elements.element(index).element(f'[data-testid="art__title"').should(be.visible).get(query.attribute('href'))
+        href = self._search_list_elements.element(index).element(f'[data-testid="art__title"').should(be.visible).get(
+            query.attribute('href'))
         return extract_book_id(href)
 
     def get_info_book(self, index):
@@ -46,19 +46,16 @@ class SearchPage:
         self._search_list_elements.element(index).element('[data-testid="art__title"]').should(be.visible).click()
         return self.get_info_book(index)
 
-    def get_count_result(self):
-        try:
-            WebDriverWait(self, 10).until(
-                lambda _: self._search_list_elements.__len__() > 0
-            )
-            return self._search_list_elements.__len__()
-        except TimeoutException:
-            return 0
-
     @allure.step("Проверить результат поиска")
     def should_search_result_name(self, text):
         with allure.step("Проверить, что количество строк > 0"):
-            actual_count = self.get_count_result()
-            assert actual_count > 0
+            try:
+                WebDriverWait(self, 10).until(
+                    lambda _: len(self._search_list_elements) > 0
+                )
+            finally:
+                actual_count = len(self._search_list_elements)
+            assert actual_count > 0, f"В результате поиска нет данных"
+
         with allure.step("Проверить, подходит ли название первого найденного элемента"):
             assert self.get_name_book(0) == text

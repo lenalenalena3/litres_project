@@ -1,9 +1,6 @@
 import allure
 from allure_commons.types import Severity
-
 from litres_project.pages.application import app
-
-text = "Красная корова Барвицкая"
 
 
 @allure.epic("WEB")
@@ -23,7 +20,8 @@ def test_add_wishlist(setup_browser):
         app.favorite_page.open_favorite()
         app.favorite_page.should_count_result(0)
     with allure.step("Найти по поиску книгу"):
-        app.menu_page.search_text(text)
+        text_search = "Красная корова Барвицкая"
+        app.menu_page.search_text(text_search)
     with allure.step("Добавить книгу в список 'Отложено'"):
         index_book = 0
         book = app.search_page.add_favorite(index_book)

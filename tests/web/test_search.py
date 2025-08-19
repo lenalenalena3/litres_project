@@ -1,6 +1,5 @@
 import allure
 from allure_commons.types import Severity
-
 from litres_project.pages.application import app
 
 
@@ -14,9 +13,9 @@ from litres_project.pages.application import app
 @allure.description("Открыть главную страницу -> Найти по поиску книгу -> Проверить результат поиска")
 def test_search(setup_browser, search_data):
     with allure.step("Открыть главную страницу"):
-        text = search_data['name']
+        text_search = search_data['name']
         app.menu_page.open_main_page()
     with allure.step("Найти по поиску книгу"):
-        app.menu_page.search_text(text)
+        app.menu_page.search_text(text_search)
     with allure.step("Проверить результат поиска"):
-        app.search_page.should_search_result_name(text)
+        app.search_page.should_search_result_name(text_search)

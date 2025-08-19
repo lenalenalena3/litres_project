@@ -1,6 +1,5 @@
 import allure
 from selene import browser, be, query
-from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
 from litres_project.helpers.helper import extract_book_id
@@ -42,17 +41,6 @@ class FavoritePage:
     def open_favorite(self):
         self._favorite.should(be.visible).click()
 
-    def get_count_result(self, count):
-        len = 0
-        try:
-            len = self._favorite_list_elements.__len__()
-            WebDriverWait(self, 10).until(
-                lambda _: self._favorite_list_elements.__len__() == count
-            )
-            return self._favorite_list_elements.__len__()
-        except TimeoutException:
-            return len
-
     @allure.step("На странице 'Мои книги' для книги {index} нажать на пункт меню 'Убрать из отложенного'")
     def del_favorite(self, index):
         self._favorite_list_elements.element(index).element('[aria-label="Меню"]').should(
@@ -61,9 +49,14 @@ class FavoritePage:
             be.visible).click()
         return self.get_info_book(index)
 
-    @allure.step("На странице 'Мои книги' проверить количество книг")
+    @allure.step("На странице 'Мои книги' проверить: количество книг ={count_book}")
     def should_count_result(self, count_book):
-        actual_count = self.get_count_result(count_book)
+        try:
+            WebDriverWait(self, 10).until(
+                lambda _: len(self._favorite_list_elements) == count_book
+            )
+        finally:
+            actual_count = len(self._favorite_list_elements)
         assert actual_count == count_book, f"Несовпадение: {actual_count} != {count_book}"
 
     @allure.step("На странице 'Мои книги' проверить список книг по названию")

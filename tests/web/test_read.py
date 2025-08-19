@@ -1,6 +1,5 @@
 import allure
 from allure_commons.types import Severity
-
 from litres_project.pages.application import app
 from litres_project.utils.resource import load_data_json
 
@@ -17,8 +16,8 @@ def test_view_contents(setup_browser):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
     with allure.step("Найти по поиску книгу"):
-        text = "Алиса в стране чудес Льюис Кэрролл перевод Нина Демурова"
-        app.menu_page.search_text(text)
+        text_search = "Алиса в стране чудес Льюис Кэрролл перевод Нина Демурова"
+        app.menu_page.search_text(text_search)
     with allure.step("Открыть книгу"):
         index_book = 0
         app.search_page.open_info_book(index_book)
