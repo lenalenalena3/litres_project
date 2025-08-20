@@ -29,6 +29,7 @@ def api_session_add_wishlist(api_session):
     yield api_session, book
     api_session.close()
 
+
 @pytest.fixture(scope="function")
 def api_session_add_cart(api_session):
     book = Book(id='65841173')
@@ -37,7 +38,8 @@ def api_session_add_cart(api_session):
     yield api_session, book
     api_session.close()
 
+
 @pytest.fixture(autouse=True)
 def delay_between_tests():
     yield
-    time.sleep(30) # Добавлено специально, чтобы избежать блокировки
+    time.sleep(30)  # Добавлено специально, чтобы избежать блокировки

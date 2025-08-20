@@ -7,6 +7,7 @@ from jsonschema import validate
 
 BASE_URL_API = 'https://api.litres.ru/foundation/api'
 
+
 @allure.step("api_request")
 def api_request(session, endpoint, method, payload=None, params=None):
     url = f"{BASE_URL_API}{endpoint}"
@@ -79,6 +80,7 @@ def api_get_status(session, field, count):
     with allure.step(f"Проверить в response: {field} == {count}"):
         assert json_data['payload']['data'][field] == count, \
             f"Ожидалось {count}, получено {json_data['payload']['data'][field]}"
+
 
 @allure.step("POST: folders для {name_folders}")
 def api_post_folders(session, name_folders):

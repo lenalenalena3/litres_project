@@ -1,9 +1,10 @@
 import allure
 from allure_commons._allure import step
 from allure_commons.types import Severity
-
 from litres_project.pages.application_mobile import app_mobile
 from litres_project.utils.resource import load_data_json
+
+text = "Красная корова"
 
 
 @allure.epic("MOBILE")
@@ -13,17 +14,16 @@ from litres_project.utils.resource import load_data_json
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
 @allure.title("Личный кабинет: Добавление в избранное")
-@allure.description("Найти по поиску книгу -> Добавить книгу в избранное -> Проверить список избранных книг")
+@allure.description("Найти по поиску книгу -> Добавить книгу в список избранных -> Проверить список избранных книг")
 def test_add_favorite(open_app):
     with step('Найти по поиску книгу'):
-        text = "Красная корова"
         app_mobile.search_page_mobile.search(text)
-    with step('Добавить первую книгу в избранные'):
+    with step('Добавить книгу в список избранных'):
         index = 0
         book = app_mobile.search_page_mobile.add_favorite(index)
     with step('Открыть список избранных книг'):
         app_mobile.favorite_page_mobile.open_favorite()
-    with step('Проверить, что в списке есть книга {text}'):
+    with step(f'Проверить, что в списке есть книга {text}'):
         app_mobile.favorite_page_mobile.should_favorite_by_name(1, [book.name])
 
 
@@ -37,7 +37,6 @@ def test_add_favorite(open_app):
 @allure.description("Найти по поиску книгу -> Открыть книгу -> Проверить оглавление")
 def test_open_contents(open_app):
     with step('Найти по поиску книгу'):
-        text = "Красная корова"
         app_mobile.search_page_mobile.search(text)
     with step('Открыть книгу'):
         index = 0
@@ -46,3 +45,26 @@ def test_open_contents(open_app):
         list_book = load_data_json('contents_mobile.json')
         contents = list_book['contents']
         app_mobile.book_page_mobile.should_contents(contents)
+
+
+@allure.epic("MOBILE")
+@allure.feature("Главная страница")
+@allure.story("Работоспособность кнопок")
+@allure.severity(Severity.NORMAL)
+@allure.label("owner", "Tinkalyuk")
+@allure.tag("regression")
+@allure.title("Главная страница: Проверка признака прочитана/не прочитана")
+@allure.description(
+    "Найти по поиску книгу -> Отметить книгу прочитанной-> Проверить появление признака 'Прочитана'-> Отметить книгу непрочитанной -> Проверить скрытие признака 'Прочитана'")
+def test_mark_read(open_app):
+    with step('Найти по поиску книгу'):
+        app_mobile.search_page_mobile.search(text)
+    with step('Отметить книгу прочитанной'):
+        index = 0
+        app_mobile.search_page_mobile.mark_read(index)
+    with step('Проверить, что книга прочитана'):
+        assert app_mobile.search_page_mobile.check_mark_read(index, visible=True) == True
+    with step('Отметить книгу не прочитанной'):
+        app_mobile.search_page_mobile.mark_read(index)
+    with step('Проверить, что книга не прочитана'):
+        assert app_mobile.search_page_mobile.check_mark_read(index, visible=False) == True

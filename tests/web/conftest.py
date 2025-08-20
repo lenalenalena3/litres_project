@@ -142,6 +142,7 @@ def api_session_add_wishlist(api_session):
     check_status_code(response2, 204)
     yield api_session, book1, book2
 
+
 @pytest.fixture(scope="function")
 def api_session_add_cart(api_session):
     book1 = Book(id='66924193')

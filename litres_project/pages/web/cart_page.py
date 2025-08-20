@@ -9,19 +9,19 @@ from litres_project.utils.logging import info_attaching
 
 class CartPage:
     def __init__(self):
-        self._cart_list_elements = browser.all('[data-testid*="cart__listItem"]')
+        self._list_cart = browser.all('[data-testid*="cart__listItem"]')
         self._cart_favorite_context_menu = browser.element(
             '//*[@data-testid="cart__modalDeleteArt"]//button')
 
     def get_field_book(self, index, field):
-        return self._cart_list_elements.element(index).element(f'[data-testid*="cart__{field}"]').should(
+        return self._list_cart.element(index).element(f'[data-testid*="cart__{field}"]').should(
             be.visible).get(query.text)
 
     def get_name_book(self, index):
         return self.get_field_book(index, 'bookCardTitle')
 
     def get_id_book(self, index):
-        href = self._cart_list_elements.element(index).element(f'[data-testid*="cart__bookCardTitle"]> a').should(
+        href = self._list_cart.element(index).element(f'[data-testid*="cart__bookCardTitle"]> a').should(
             be.visible).get(query.attribute('href'))
         return extract_book_id(href)
 
@@ -38,10 +38,10 @@ class CartPage:
     def should_count_result(self, count_book):
         try:
             WebDriverWait(self, 10).until(
-                lambda _: len(self._cart_list_elements) == count_book
+                lambda _: len(self._list_cart) == count_book
             )
         finally:
-            actual_count = len(self._cart_list_elements)
+            actual_count = len(self._list_cart)
         assert actual_count == count_book, \
             f"Несовпадение: {actual_count} != {count_book}"
 
@@ -63,7 +63,7 @@ class CartPage:
 
     @allure.step("На странице 'Корзина' для книги {index} нажать на кнопку 'Удалить'")
     def del_cart(self, index):
-        self._cart_list_elements.element(index).element('[data-testid="cart__listDeleteButton"]').should(
+        self._list_cart.element(index).element('[data-testid="cart__listDeleteButton"]').should(
             be.visible).click()
         self._cart_favorite_context_menu.should(be.visible).click()
         return self.get_info_book(index)

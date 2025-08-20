@@ -4,12 +4,14 @@ import allure
 import requests
 from selene import browser
 
+
 def info_attaching(info, name_file: str = "info"):
     allure.attach(
         body=str(info),
         name=name_file,
         attachment_type=allure.attachment_type.TEXT
     )
+
 
 def add_screenshot():
     png = browser.driver.get_screenshot_as_png()

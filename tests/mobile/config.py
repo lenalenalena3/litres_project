@@ -54,6 +54,7 @@ class LocalEmulatorSettings(BaseAppSettings):
         extra='ignore'
     )
 
+
 class BrowserStackSettings(BaseAppSettings):
     APP: str
     PLATFORM_NAME: str

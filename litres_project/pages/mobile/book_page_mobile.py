@@ -5,9 +5,9 @@ from selene import browser, be, query
 
 class BookPageMobile:
     def __init__(self):
-        self._open_contents_button=browser.element((AppiumBy.ID, 'ru.litres.android:id/textViewChaptersRowRoot'))
-        self._list_contents=browser.all((AppiumBy.XPATH,'//android.widget.TextView[@resource-id="ru.litres.android:id/toc_title"]'))
-
+        self._open_contents_button = browser.element((AppiumBy.ID, 'ru.litres.android:id/textViewChaptersRowRoot'))
+        self._list_contents = browser.all(
+            (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="ru.litres.android:id/toc_title"]'))
 
     @allure.step("Проверить оглавление")
     def should_contents(self, list_book):

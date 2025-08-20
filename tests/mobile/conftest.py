@@ -19,9 +19,11 @@ def pytest_addoption(parser):
         help="Укажите файл настроек: local_emulator, bstack"
     )
 
+
 @pytest.fixture(scope="session", autouse=True)
 def load_env():
     load_dotenv()
+
 
 @pytest.fixture(scope='function', autouse=True)
 def mobile_management(request):
@@ -44,8 +46,12 @@ def mobile_management(request):
     if context == 'bstack':
         attach_mobile.add_bstack_video(session_id)
 
+
 @pytest.fixture(scope='function')
 def open_app(mobile_management):
     browser.element((AppiumBy.ID, 'ru.litres.android:id/choosebutton')).should(be.visible).click()
-    browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_deny_button')).should(be.visible).click()
-    browser.element((AppiumBy.ID, 'ru.litres.android:id/circleButtonSubscriptionPaywallClose')).should(be.visible).click()
+    browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_deny_button')).should(
+        be.visible).click()
+    browser.element((AppiumBy.ID, 'ru.litres.android:id/circleButtonSubscriptionPaywallClose')).should(
+        be.visible).click()
+    browser.element((AppiumBy.ID, 'ru.litres.android:id/remind_later')).should(be.visible).click()
