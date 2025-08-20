@@ -12,7 +12,7 @@ from litres_project.pages.application import app
 @allure.title("Личный кабинет: Добавление книги в корзину")
 @allure.description(
     "Открыть главную страницу -> Проверить, что корзина пустая -> Найти по поиску книгу -> Добавить книгу в корзину -> Проверить корзину")
-def test_add_cart(setup_browser):
+def test_add_cart(web_management):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
     with allure.step("Проверить, что корзина пустая"):
@@ -40,7 +40,7 @@ def test_add_cart(setup_browser):
 @allure.title("Личный кабинет: Удаление книги из корзины")
 @allure.description("Предусловие: в 'Корзине' есть две книги. "
                     "Открыть главную страницу -> Открыть корзину -> Проверить корзину -> Удалить одну книгу -> Проверить корзину")
-def test_del_cart(setup_browser, api_session_add_cart):
+def test_del_cart(web_management, api_session_add_cart):
     with allure.step("Открыть главную страницу"):
         api_session, book_del, book = api_session_add_cart
         app.menu_page.open_main_page()

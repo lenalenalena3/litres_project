@@ -12,7 +12,7 @@ from litres_project.utils.resource import load_data_json
 @allure.tag("regression")
 @allure.title("Книжная страница: Просмотр оглавления")
 @allure.description("Открыть главную страницу -> Найти по поиску книгу -> Открыть книгу -> Проверить оглавление")
-def test_view_contents(setup_browser):
+def test_view_contents(web_management):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
     with allure.step("Найти по поиску книгу"):

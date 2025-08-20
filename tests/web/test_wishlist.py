@@ -12,7 +12,7 @@ from litres_project.pages.application import app
 @allure.title("Личный кабинет: Добавление книги в список 'Отложено'")
 @allure.description(
     "Открыть главную страницу -> Проверить, что список 'Отложено' пуст -> Найти по поиску книгу -> Добавить книгу в список 'Отложено' -> Проверить список 'Отложено'")
-def test_add_wishlist(setup_browser):
+def test_add_wishlist(web_management):
     with allure.step("Открыть главную страницу"):
         app.menu_page.open_main_page()
     with allure.step("Проверить, что список 'Отложено' пуст"):
@@ -41,7 +41,7 @@ def test_add_wishlist(setup_browser):
 @allure.description(
     "Предусловие: в списке 'Отложено' есть две книги. "
     "Открыть главную страницу -> Открыть список 'Отложено' -> Проверить список 'Отложено' -> Удалить одну книгу -> Проверить список 'Отложено'")
-def test_del_wishlist(setup_browser, api_session_add_wishlist):
+def test_del_wishlist(web_management, api_session_add_wishlist):
     with allure.step("Открыть главную страницу"):
         api_session, book, book_del = api_session_add_wishlist
         app.menu_page.open_main_page()
