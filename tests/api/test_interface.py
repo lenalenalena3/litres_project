@@ -2,7 +2,6 @@ import allure
 from allure_commons.types import Severity
 
 from litres_project.helpers.helper import verify_response_text
-from litres_project.helpers.helper_api import api_request, check_status_code, validate_schema
 
 
 @allure.epic("API")
@@ -19,13 +18,13 @@ from litres_project.helpers.helper_api import api_request, check_status_code, va
     " - проверить статус код, "
     " - сверить с схемой get_list_suggestions.json,"
     " - проверить, что в каждой строки ответа содержится передаваемый текст")
-def test_api_get_suggestions(api_session):
+def test_api_get_suggestions(api_session,helper_api):
     with allure.step("Отправить запрос GET_suggestions"):
         text = 'сказки'
         endpoint = f"/search/suggestions"
         params = {'q': text}
-        response = api_request(session=api_session, endpoint=endpoint, method="GET", params=params)
+        response = helper_api.api_request(session=api_session, endpoint=endpoint, method="GET", params=params)
     with allure.step("Проверить ответ"):
-        check_status_code(response, 200)
-        validate_schema(response, 'get_list_suggestions.json')
+        helper_api.check_status_code(response, 200)
+        helper_api.validate_schema(response, 'get_list_suggestions.json')
         assert verify_response_text(response.json(), text) == True

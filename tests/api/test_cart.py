@@ -1,7 +1,6 @@
 import allure
 from allure_commons.types import Severity
 
-from litres_project.helpers.helper_api import api_put_cart_add, validate_schema, check_status_code, api_put_cart_remove
 from litres_project.models.book_model import Book
 
 
@@ -19,14 +18,14 @@ from litres_project.models.book_model import Book
     " - проверить, что статус код = 200,"
     " - сверить с схемой put_add_cart.json,"
     " - проверить, что в ответе есть добавленный id")
-def test_api_put_cart_add(api_session):
+def test_api_put_cart_add(api_session, helper_api):
     with allure.step("Отправить запрос PUT_cart_add"):
         id_book = '65841173'
         book = Book(id=id_book)
-        response = api_put_cart_add(api_session, book.id)
+        response = helper_api.api_put_cart_add(api_session, book.id)
     with allure.step("Проверить ответ"):
-        check_status_code(response, 200)
-        validate_schema(response, 'put_add_cart.json')
+        helper_api.check_status_code(response, 200)
+        helper_api.validate_schema(response, 'put_add_cart.json')
         json_data = response.json()
         field = "added_art_ids"
         with allure.step(f"Проверить в response: {field} == [{id_book}]"):
@@ -47,9 +46,9 @@ def test_api_put_cart_add(api_session):
     "В полученном ответе:"
     " - проверить, что статус код = 204,"
     " - проверить, что в ответе есть добавленный id")
-def test_api_put_cart_remove(api_session_add_cart):
+def test_api_put_cart_remove(api_session_add_cart, helper_api):
     with allure.step("Отправить запрос PUT_cart_remove"):
         api_session, book = api_session_add_cart
-        response = api_put_cart_remove(api_session, book.id)
+        response = helper_api.api_put_cart_remove(api_session, book.id)
     with allure.step("Проверить ответ"):
-        check_status_code(response, 204)
+        helper_api.check_status_code(response, 204)
