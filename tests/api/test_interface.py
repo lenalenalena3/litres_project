@@ -7,16 +7,15 @@ from litres_project.helpers.helper import verify_response_text
 @allure.epic("API")
 @allure.feature("Интерфейс")
 @allure.story("Проверка подсказок")
-@allure.link("https://www.litres.ru/", name="litres")
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
 @allure.title("Главное меню: Проверка подсказок для строки поиска")
 @allure.description(
-    "Отправить запрос GET_suggestions -> "
-    "В полученном ответе:"
-    " - проверить статус код, "
-    " - сверить с схемой get_list_suggestions.json,"
+    "1. Отправить запрос GET_suggestions \n "
+    "2. Проверить ответ:\n"
+    " - проверить статус код,\n"
+    " - сверить с схемой get_list_suggestions.json,\n"
     " - проверить, что в каждой строки ответа содержится передаваемый текст")
 def test_api_get_suggestions(api_session,helper_api):
     with allure.step("Отправить запрос GET_suggestions"):

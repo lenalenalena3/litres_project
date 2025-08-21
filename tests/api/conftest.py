@@ -47,7 +47,6 @@ def api_session():
 def api_session_add_wishlist(api_session, helper_api):
     book = Book(id='65841173')
     book_attaching(book, "Book")
-    helper_api.set_base_url_api(os.getenv("BASE_URL_API"))
     helper_api.api_put_wishlist(api_session, book.id)
     yield api_session, book
     api_session.close()
@@ -57,7 +56,6 @@ def api_session_add_wishlist(api_session, helper_api):
 def api_session_add_cart(api_session, helper_api):
     book = Book(id='65841173')
     book_attaching(book, "Book")
-    helper_api.set_base_url_api(os.getenv("BASE_URL_API"))
     helper_api.api_put_cart_add(api_session, book.id)
     yield api_session, book
     api_session.close()

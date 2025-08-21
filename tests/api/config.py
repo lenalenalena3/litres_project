@@ -1,1 +1,0 @@
-BASE_URL_API = 'https://api.litres.ru/foundation/api'

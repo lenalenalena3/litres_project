@@ -10,7 +10,10 @@ from litres_project.pages.application import app
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("smoke", "regression")
 @allure.title("Главное меню: Проверка поиска")
-@allure.description("Открыть главную страницу -> Найти по поиску книгу -> Проверить результат поиска")
+@allure.description(
+    "1. Открыть главную страницу \n"
+    "2. Найти по поиску книгу \n"
+    "3. Проверить результат поиска")
 def test_search(web_management, search_data):
     with allure.step("Открыть главную страницу"):
         text_search = search_data['name']
