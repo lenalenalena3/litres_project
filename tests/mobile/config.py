@@ -15,6 +15,7 @@ class BaseAppSettings(BaseSettings):
     APP_ACTIVITY: str
     DEVICE_NAME: str
     UDID: str
+    TIMEOUT: int
 
     def __init__(self, **kwargs):
         # Вывод информации перед загрузкой настроек
@@ -75,16 +76,14 @@ def get_settings(context: Literal["local_emulator", "bstack"]) -> BaseAppSetting
         raise ValueError(f"Unknown context: {context}")
 
 
-def driver_options(context: Literal["local_emulator", "bstack"]) -> UiAutomator2Options:
-    settings = get_settings(context)
+def driver_options(settings, context) -> UiAutomator2Options:
     options = UiAutomator2Options()
-
     options.set_capability('remote_url', settings.REMOTE_URL)
     options.set_capability('deviceName', settings.DEVICE_NAME)
     options.set_capability('udid', settings.UDID)
     options.set_capability('appActivity', settings.APP_ACTIVITY)
 
-    if context in ("local_emulator", "local_real"):
+    if context == 'local_emulator':
         options.set_capability('app', abs_path_from_project(settings.APP))
 
     if context == 'bstack':

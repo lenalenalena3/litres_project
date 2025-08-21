@@ -4,12 +4,12 @@ import allure_commons
 from appium.webdriver.common.appiumby import AppiumBy
 from dotenv import load_dotenv
 from selene import browser, support, be
-import os
 
 from appium import webdriver
 
 from litres_project.utils import attach_mobile
 from tests.mobile import config
+from tests.mobile.config import get_settings
 
 
 def pytest_addoption(parser):
@@ -25,12 +25,17 @@ def load_env():
     load_dotenv()
 
 
+@pytest.fixture
+def context(request):
+    return request.config.getoption("--context") or 'local_emulator'
+
+
 @pytest.fixture(scope='function', autouse=True)
-def mobile_management(request):
-    context = request.config.getoption("--context") or 'local_emulator'
-    options = config.driver_options(context=context)
+def mobile_management(request, context):
+    settings = get_settings(context)
+    options = config.driver_options(settings, context=context)
     browser.config.driver = webdriver.Remote(options.get_capability('remote_url'), options=options)
-    browser.config.timeout = float(os.getenv('timeout', '10.0'))
+    browser.config.timeout = settings.TIMEOUT
     browser.config._wait_decorator = support._logging.wait_with(
         context=allure_commons._allure.StepContext
     )

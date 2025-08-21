@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.options import Options
 
 class WebSettings(BaseSettings):
     BROWSER_NAME: str
-    TIMEOUT: float
+    TIMEOUT: int
     BASE_URL: str
     BASE_URL_API: str
 
@@ -59,7 +59,7 @@ def get_settings(context: Literal["local_web", "selenoid"]) -> WebSettings:
 
 
 def driver_options(settings, context):
-    settings = get_settings(context)
+    #settings = get_settings(context)
     if context == 'selenoid':
         options = FirefoxOptions() if settings.BROWSER_NAME.lower() == "firefox" else Options()
         selenoid_capabilities = {
