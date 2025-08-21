@@ -53,7 +53,7 @@ class TestWishlist:
     @allure.description(
         "1. Отправить запрос DELETE_wishlist с несуществующим id \n"
         "2. Проверить ответ: \n: "
-        "- проверить, что статус код = 404")
+        " - проверить, что статус код = 404")
     def test_api_delete_wishlist_non_existent(self, api_session, helper_api):
         with allure.step("Отправить запрос DELETE_wishlist"):
             id_book = '12345678'

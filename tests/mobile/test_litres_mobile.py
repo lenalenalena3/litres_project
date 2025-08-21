@@ -14,7 +14,11 @@ text = "Красная корова"
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
 @allure.title("Личный кабинет: Добавление в избранное")
-@allure.description("Найти по поиску книгу -> Добавить книгу в список избранных -> Проверить список избранных книг")
+@allure.description(
+    "1. Найти по поиску книгу \n"
+    "2. Добавить книгу в список избранных \n"
+    "3. Открыть список избранных книг\n"
+    "4. Проверить список избранных книг")
 def test_add_favorite(open_app):
     with step('Найти по поиску книгу'):
         app_mobile.search_page_mobile.search(text)
@@ -34,7 +38,10 @@ def test_add_favorite(open_app):
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
 @allure.title("Книжная страница: Просмотр оглавления")
-@allure.description("Найти по поиску книгу -> Открыть книгу -> Проверить оглавление")
+@allure.description(
+    "1. Найти по поиску книгу \n"
+    "2. Открыть книгу \n"
+    "3. Проверить оглавление")
 def test_open_contents(open_app):
     with step('Найти по поиску книгу'):
         app_mobile.search_page_mobile.search(text)
@@ -55,7 +62,11 @@ def test_open_contents(open_app):
 @allure.tag("regression")
 @allure.title("Главная страница: Проверка признака прочитана/не прочитана")
 @allure.description(
-    "Найти по поиску книгу -> Отметить книгу прочитанной-> Проверить появление признака 'Прочитана'-> Отметить книгу непрочитанной -> Проверить скрытие признака 'Прочитана'")
+    "1. Найти по поиску книгу \n"
+    "2. Отметить книгу прочитанной \n"
+    "3. Проверить появление признака 'Прочитана' \n"
+    "4. Отметить книгу непрочитанной \n"
+    "5. Проверить скрытие признака 'Прочитана'")
 def test_mark_read(open_app):
     with step('Найти по поиску книгу'):
         app_mobile.search_page_mobile.search(text)
