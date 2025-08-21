@@ -32,7 +32,7 @@ def load_env():
 
 @pytest.fixture
 def context(request):
-    return request.config.getoption("--context") or 'selenoid' #or 'local_web'
+    return request.config.getoption("--context") or 'local_web'
 
 @pytest.fixture(scope='function', autouse=True)
 def web_management(request, context):
