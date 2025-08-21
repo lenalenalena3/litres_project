@@ -88,10 +88,10 @@ def driver_options(context: Literal["local_emulator", "bstack"]) -> UiAutomator2
         options.set_capability('app', abs_path_from_project(settings.APP))
 
     if context == 'bstack':
-        credentials_path = abs_path_from_project('.env.credentials')
+        credentials_path = abs_path_from_project('.env.bstack_credentials')
         print(f"Загружаем credentials из: {credentials_path}")
         if not Path(credentials_path).exists():
-            raise FileNotFoundError(f"Файл .env.credentials не найден: {credentials_path}")
+            raise FileNotFoundError(f"Файл .env.bstack_credentials не найден: {credentials_path}")
         load_dotenv(dotenv_path=credentials_path)
         bstack_userName = os.getenv('USER_NAME')
         bstack_accessKey = os.getenv('ACCESS_KEY')

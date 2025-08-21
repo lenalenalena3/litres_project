@@ -58,7 +58,7 @@ def get_settings(context: Literal["local_web", "selenoid"]) -> WebSettings:
         raise ValueError(f"Unknown context: {context}")
 
 
-def driver_options(context: Literal["local_web", "selenoid"]):
+def driver_options(settings, context):
     settings = get_settings(context)
     if context == 'selenoid':
         options = FirefoxOptions() if settings.BROWSER_NAME.lower() == "firefox" else Options()
@@ -90,3 +90,4 @@ def driver_options(context: Literal["local_web", "selenoid"]):
         if settings.BROWSER_NAME.lower() == "firefox":
             options.set_preference("devtools.console.stdout.content", True)
             options.set_preference("browser.console.showInPanel", True)
+    return options

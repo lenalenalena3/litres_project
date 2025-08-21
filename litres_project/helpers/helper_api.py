@@ -7,14 +7,14 @@ from jsonschema import validate
 
 class APIHelper:
     def __init__(self):
-        self.settings = None
+        self._base_url_api = None
 
-    def set_settings(self, settings):
-        self.settings = settings
+    def set_base_url_api(self, value):
+        self._base_url_api = value
 
     @allure.step("api_request")
     def api_request(self, session, endpoint, method, payload=None, params=None):
-        url = f"{self.settings.BASE_URL_API}{endpoint}"
+        url = f"{self._base_url_api}{endpoint}"
         method = method.upper()
         headers = {"Content-Type": "application/json"}
         data = json.dumps(payload)

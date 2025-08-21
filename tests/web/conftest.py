@@ -32,12 +32,12 @@ def load_env():
 
 @pytest.fixture
 def context(request):
-    return request.config.getoption("--context") or 'local_web'
+    return request.config.getoption("--context") or 'selenoid' #or 'local_web'
 
 @pytest.fixture(scope='function', autouse=True)
 def web_management(request, context):
     settings = config.get_settings(context)
-    options = config.driver_options(context=context)
+    options = config.driver_options(settings, context)
     if context == 'selenoid':
         selenoid_url = settings.SELENOID_URL
 
@@ -55,7 +55,6 @@ def web_management(request, context):
             command_executor=f"https://{selenoid_login}:{selenoid_pass}@{selenoid_url}/wd/hub",
             options=options
         )
-
     if context == 'local_web':
         if settings.BROWSER_NAME.lower() == "firefox":
             driver = webdriver.Firefox(options=options)
@@ -84,48 +83,44 @@ def web_management(request, context):
 def search_data(request):
     return request.param
 
-
-
 @pytest.fixture(scope="function")
-def api_session(request, context):
+def api_session(request):
     session = requests.Session()
-    settings = config.get_settings(context)
-    yield session, settings
+    yield session
     session.close()
 
+@pytest.fixture
+def helper_api(context):
+    settings = config.get_settings(context)
+    helper = APIHelper()
+    helper.set_base_url_api(settings.BASE_URL_API)
+    return helper
 
 @pytest.fixture(scope="function")
-def api_session_add_wishlist(api_session):
-    api_session, settings = api_session
-    api_helper = APIHelper()
-    api_helper.set_settings(settings)
-
+def api_session_add_wishlist(api_session, helper_api):
     book1 = Book(id='66924193')
     book2 = Book(id='65841173')
     book_attaching(book1, "Book1")
     book_attaching(book2, "Book2")
 
-    response1 = api_helper.api_put_wishlist(api_session, book1.id)
-    api_helper.check_status_code(response1, 204)
+    response_book1 = helper_api.api_put_wishlist(api_session, book1.id)
+    helper_api.check_status_code(response_book1, 204)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки
-    response2 = api_helper.api_put_wishlist(api_session, book2.id)
-    api_helper.check_status_code(response2, 204)
+    response_book2 = helper_api.api_put_wishlist(api_session, book2.id)
+    helper_api.check_status_code(response_book2, 204)
     yield api_session, book1, book2
 
 
 @pytest.fixture(scope="function")
-def api_session_add_cart(api_session):
-    api_session, settings = api_session
-    api_helper = APIHelper()
-    api_helper.set_settings(settings)
-
+def api_session_add_cart(api_session, helper_api):
     book1 = Book(id='66924193')
     book2 = Book(id='65841173')
     book_attaching(book1, "Book1")
     book_attaching(book2, "Book2")
-    response1 = api_helper.api_put_cart_add(api_session, book1.id)
-    api_helper.check_status_code(response1, 200)
+
+    response_book1 = helper_api.api_put_cart_add(api_session, book1.id)
+    helper_api.check_status_code(response_book1, 200)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки
-    response2 = api_helper.api_put_cart_add(api_session, book2.id)
-    api_helper.check_status_code(response2, 200)
+    response_book2 = helper_api.api_put_cart_add(api_session, book2.id)
+    helper_api.check_status_code(response_book2, 200)
     yield api_session, book1, book2
