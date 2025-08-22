@@ -67,8 +67,12 @@ Mobile:
 <!-- Allure report -->
 
 ### <img width="3%" title="Allure Report" src="images/allure_report.png"> Allure report
-
-
+UI:
+![This is an image](images/allure_web.jpg)
+API:
+![This is an image](images/allure_api.jpg)
+Mobile:
+![This is an image](images/allure_mobile.jpg)
 <!-- Allure TestOps -->
 
 ### <img width="3%" title="Allure TestOps" src="images/allure_testops.png"> Интеграция с Allure TestOps
@@ -79,6 +83,9 @@ Mobile:
 ### <img width="3%" title="Telegram" src="images/tg.png"> Оповещения в Telegram
 
 ##### После выполнения тестов, в Telegram bot приходит сообщение с графиком и информацией о тестовом прогоне.
+![This is an image](images/bot_web_result.ipg)
+![This is an image](images/bot_api_result.ipg)
+![This is an image](images/bot_mobile_result.ipg)
 
 
 
