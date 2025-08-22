@@ -83,11 +83,9 @@ Mobile:
 ### <img width="3%" title="Telegram" src="images/tg.png"> Оповещения в Telegram
 
 ##### После выполнения тестов, в Telegram bot приходит сообщение с графиком и информацией о тестовом прогоне.
-![This is an image](images/bot_web_result.jpg)
 <img src="images/bot_web_result.jpg" alt="This is an image" width="400">
-![This is an image](images/bot_api_result.jpg)
-<img src="images/bot_web_result.jpg" alt="This is an image" width="700">
-![This is an image](images/bot_mobile_result.jpg)
+<img src="images/bot_api_result.jpg" alt="This is an image" width="400">
+<img src="images/bot_mobile_result.jpg" alt="This is an image" width="400">
 
 
 
