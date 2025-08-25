@@ -10,15 +10,16 @@ qa.guru</a>
 ### Используемые технологии
 
 <p  align="center">
+    <code><img width="5%" title="PyCharm" src="images/pycharm.png"></code>
     <code><img width="5%" title="Python" src="images/python.png"></code>
     <code><img width="5%" title="Pytest" src="images/pytest.png"></code>
     <code><img width="5%" title="Requests" src="images/requests.png"></code>
     <code><img width="5%" title="Selene" src="images/selene.png"></code>
     <code><img width="5%" title="Selenium" src="images/selenium.png"></code>
+    <code><img width="5%" title="Selenoid" src="images/selenoid.png"></code>
     <code><img width="5%" title="Appium" src="images/appium.png"></code>
-    <code><img width="5%" title="Browserstack" src="images/browserstack.png"></code>
-    <code><img width="5%" title="PyCharm" src="images/pycharm.png"></code>
     <code><img width="5%" title="Android Studio" src="images/android_studio.png"></code>
+    <code><img width="5%" title="Browserstack" src="images/browserstack.png"></code>
     <code><img width="5%" title="Jenkins" src="images/jenkins.png"></code>
     <code><img width="5%" title="Allure Report" src="images/allure_report.png"></code>
     <code><img width="5%" title="Allure TestOps" src="images/allure_testops.png"></code>
@@ -95,6 +96,15 @@ Mobile:
 <img src="images/bot_api_result.jpg" alt="This is an image" width="400">
 <img src="images/bot_mobile_result.jpg" alt="This is an image" width="400">
 
+
+## Видео запуска тестов
+### <img src="images/selenoid.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска UI-тестов в Selenoid
+<p align="Книжная страница: Просмотр оглавления" src="images/test_web.mp4">
+</p>
+
+### <img src="images/browserstack.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска MOBILE-тестов в Browserstack
+<p align="Книжная страница: Просмотр оглавления" src="images/test_mobile.mp4">
+</p>
 
 
 
