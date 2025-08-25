@@ -99,11 +99,13 @@ Mobile:
 
 ## Видео запуска тестов
 ### <img src="images/selenoid.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска UI-тестов в Selenoid
-<p align="Книжная страница: Просмотр оглавления" src="images/test_web.gif">
+<p align="center">
+<img title="Книжная страница: Просмотр оглавления" src="images/test_web.gif">
 </p>
 
 ### <img src="images/browserstack.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска MOBILE-тестов в Browserstack
-<p align="Книжная страница: Просмотр оглавления" src="images/test_mobile.mp4">
+<p align="center">
+<img title="Книжная страница: Просмотр оглавления" src="images/test_mobile.gif">
 </p>
 
 
