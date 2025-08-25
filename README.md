@@ -99,9 +99,8 @@ Mobile:
 
 ## Видео запуска тестов
 ### <img src="images/selenoid.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска UI-тестов в Selenoid
-<video src="images/test_web.mp4" width="800" controls title="Книжная страница: Просмотр оглавления">
-  Ваш браузер не поддерживает видео тег.
-</video>
+<p align="Книжная страница: Просмотр оглавления" src="images/test_web.gif">
+</p>
 
 ### <img src="images/browserstack.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска MOBILE-тестов в Browserstack
 <p align="Книжная страница: Просмотр оглавления" src="images/test_mobile.mp4">
