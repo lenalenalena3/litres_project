@@ -76,6 +76,9 @@ Mobile:
 <!-- Allure TestOps -->
 
 ### <img width="3%" title="Allure TestOps" src="images/allure_testops.png"> Интеграция с Allure TestOps
+##### В Allure TestOps загружены тест-кейсы из Jenkins, а также добавлены ручные тесты
+![This is an image](images/tests_allure_testops.jpg)
+![This is an image](images/dashboards_allure_testops.jpg)
 
 <!-- Jira -->
 
