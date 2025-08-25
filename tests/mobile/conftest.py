@@ -1,6 +1,7 @@
 import allure
 import pytest
 import allure_commons
+from allure_commons._allure import step
 from appium.webdriver.common.appiumby import AppiumBy
 from dotenv import load_dotenv
 from selene import browser, support, be
@@ -54,9 +55,8 @@ def mobile_management(request, context):
 
 @pytest.fixture(scope='function')
 def open_app(mobile_management):
-    browser.element((AppiumBy.ID, 'ru.litres.android:id/choosebutton')).should(be.visible).click()
-    browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_deny_button')).should(
-        be.visible).click()
-    browser.element((AppiumBy.ID, 'ru.litres.android:id/circleButtonSubscriptionPaywallClose')).should(
-        be.visible).click()
-    browser.element((AppiumBy.ID, 'ru.litres.android:id/remind_later')).should(be.visible).click()
+    with step('Выбираем язык для приложения'):
+        browser.element((AppiumBy.ID, 'ru.litres.android:id/choosebutton')).should(be.clickable).click()
+    with step('Закрываем окно о подписке'):
+        browser.element((AppiumBy.ID, 'ru.litres.android:id/circleButtonSubscriptionPaywallClose')).should(
+            be.clickable).click()

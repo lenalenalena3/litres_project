@@ -11,7 +11,10 @@ class BookPageMobile:
 
     @allure.step("Проверить оглавление")
     def should_contents(self, list_book):
-        self._open_contents_button.should(be.visible).click()
+        browser.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
+                                    'new UiScrollable(new UiSelector().scrollable(true))'
+                                    '.scrollIntoView(new UiSelector().resourceId("ru.litres.android:id/textViewChaptersRowRoot"))')
+        self._open_contents_button.should(be.clickable).click()
         count_list_actual = len(self._list_contents)
         count_list_expected = len(list_book)
         assert count_list_actual == count_list_expected, f"Несовпадение количества строк: в интерфейсе {count_list_actual} != в файле {count_list_expected}"

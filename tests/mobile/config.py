@@ -12,21 +12,19 @@ from litres_project.utils.resource import abs_path_from_project
 
 class BaseAppSettings(BaseSettings):
     REMOTE_URL: str
-    APP_ACTIVITY: str
     DEVICE_NAME: str
-    UDID: str
     TIMEOUT: int
+    APP_WAIT_ACTIVITY: str
+    APP_ACTIVITY: str
 
     def __init__(self, **kwargs):
         # Вывод информации перед загрузкой настроек
         env_file = self.model_config.get('env_file', '.env')
         abs_env_path = abs_path_from_project(env_file)
-        print(f"\n[Конфигурация] Загружаем настройки из файла: {abs_env_path}")
-        print(f"[Конфигурация] Файл существует: {Path(abs_env_path).absolute().exists()}")
+        print(f"\n[Конфигурация] файл настроек: {abs_env_path}")
         kwargs['_env_file'] = abs_env_path
         kwargs['_env_file_encoding'] = 'utf-8'
         super().__init__(**kwargs)
-        print("[Конфигурация] Настройки успешно загружены\n")
 
     model_config = SettingsConfigDict(
         env_file_encoding='utf-8',
@@ -60,6 +58,7 @@ class BrowserStackSettings(BaseAppSettings):
     APP: str
     PLATFORM_NAME: str
     PLATFORM_VERSION: str
+
     model_config = SettingsConfigDict(
         env_file='.env.bstack',
         env_file_encoding='utf-8',
@@ -80,12 +79,13 @@ def driver_options(settings, context) -> UiAutomator2Options:
     options = UiAutomator2Options()
     options.set_capability('remote_url', settings.REMOTE_URL)
     options.set_capability('deviceName', settings.DEVICE_NAME)
-    options.set_capability('udid', settings.UDID)
+    options.set_capability('appWaitActivity', settings.APP_WAIT_ACTIVITY)
     options.set_capability('appActivity', settings.APP_ACTIVITY)
 
+    options.auto_grant_permissions = True
     if context == 'local_emulator':
         options.set_capability('app', abs_path_from_project(settings.APP))
-
+        options.set_capability('enforceAppInstall', True)
     if context == 'bstack':
         credentials_path = abs_path_from_project('.env.bstack_credentials')
         print(f"Загружаем credentials из: {credentials_path}")
@@ -101,7 +101,7 @@ def driver_options(settings, context) -> UiAutomator2Options:
 
         options.set_capability(
             'bstack:options', {
-                'projectName': 'Wikipedia project',
+                'projectName': 'Python project',
                 'buildName': 'browserstack-build-1',
                 'sessionName': 'BStack test',
                 'userName': bstack_userName,
