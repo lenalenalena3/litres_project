@@ -77,6 +77,11 @@ Mobile:
 
 ### <img width="3%" title="Allure TestOps" src="images/allure_testops.png"> Интеграция с Allure TestOps
 
+<!-- Jira -->
+
+### <img width="3%" title="Jira" src="images/jira.png"> Интеграция с Jira
+
+![This is an image](images/jira.jpg)
 
 <!-- Telegram -->
 
