@@ -17,7 +17,7 @@ from litres_project.helpers.helper import verify_response_text
     " - проверить статус код,\n"
     " - сверить с схемой get_list_suggestions.json,\n"
     " - проверить, что в каждой строки ответа содержится передаваемый текст")
-def test_api_get_suggestions(api_session,helper_api):
+def test_api_get_suggestions(api_session, helper_api):
     with allure.step("Отправить запрос GET_suggestions"):
         text = 'сказки'
         endpoint = f"/search/suggestions"

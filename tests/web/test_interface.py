@@ -2,6 +2,7 @@ import allure
 from allure_commons.types import Severity
 from litres_project.pages.application import app
 
+
 @allure.epic("WEB")
 @allure.feature("Интерфейс")
 @allure.story("Главное меню")

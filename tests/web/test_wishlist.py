@@ -2,6 +2,7 @@ import allure
 from allure_commons.types import Severity
 from litres_project.pages.application import app
 
+
 @allure.epic("WEB")
 @allure.feature("Личный кабинет")
 @allure.story("Список 'Отложено'")
@@ -33,7 +34,6 @@ class TestWishlist:
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()
             app.favorite_page.should_favorite_by_name(1, [book.name])
-
 
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")

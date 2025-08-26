@@ -26,13 +26,16 @@ def pytest_addoption(parser):
         help="Укажите файл настроек: selenoid, local_web"
     )
 
+
 @pytest.fixture(scope="session", autouse=True)
 def load_env():
     load_dotenv()
 
+
 @pytest.fixture
 def context(request):
     return request.config.getoption("--context") or 'local_web'
+
 
 @pytest.fixture(scope='function', autouse=True)
 def web_management(request, context):
@@ -79,9 +82,11 @@ def web_management(request, context):
     with allure.step("Закрыть браузер"):
         browser.quit()
 
+
 @pytest.fixture(params=load_data_json_value('search.json'))
 def search_data(request):
     return request.param
+
 
 @pytest.fixture(scope="function")
 def api_session(request):
@@ -89,12 +94,14 @@ def api_session(request):
     yield session
     session.close()
 
+
 @pytest.fixture
 def helper_api(context):
     settings = config.get_settings(context)
     helper = APIHelper()
     helper.set_base_url_api(settings.BASE_URL_API)
     return helper
+
 
 @pytest.fixture(scope="function")
 def api_session_add_wishlist(api_session, helper_api):

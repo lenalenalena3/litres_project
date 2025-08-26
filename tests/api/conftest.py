@@ -36,6 +36,7 @@ def helper_api(context):
     helper.set_base_url_api(os.getenv("BASE_URL_API"))
     return helper
 
+
 @pytest.fixture(scope="function")
 def api_session():
     session = requests.Session()

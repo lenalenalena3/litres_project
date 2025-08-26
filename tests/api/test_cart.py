@@ -43,8 +43,8 @@ class TestCart:
         "2. Проверить ответ:\n"
         " - проверить, что статус код = 204")
     def test_api_put_cart_remove(self, api_session_add_cart, helper_api):
+        session, book = api_session_add_cart
         with allure.step("Отправить запрос PUT_cart_remove"):
-            api_session, book = api_session_add_cart
-            response = helper_api.api_put_cart_remove(api_session, book.id)
+            response = helper_api.api_put_cart_remove(session, book.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 204)

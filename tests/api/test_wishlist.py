@@ -38,10 +38,10 @@ class TestWishlist:
         "2. Проверить ответ: \n"
         " - проверить, что статус код = 204")
     def test_api_delete_wishlist(self, api_session_add_wishlist, helper_api):
+        session, id_book_del = api_session_add_wishlist
         with allure.step("Отправить запрос DELETE_wishlist"):
-            api_session, id_book_del = api_session_add_wishlist
             book_attaching(id_book_del, "Book_del")
-            response = helper_api.api_delete_wishlist(api_session, id_book_del.id)
+            response = helper_api.api_delete_wishlist(session, id_book_del.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 204)
 

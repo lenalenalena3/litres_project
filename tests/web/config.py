@@ -59,7 +59,7 @@ def get_settings(context: Literal["local_web", "selenoid"]) -> WebSettings:
 
 
 def driver_options(settings, context):
-    #settings = get_settings(context)
+    # settings = get_settings(context)
     if context == 'selenoid':
         options = FirefoxOptions() if settings.BROWSER_NAME.lower() == "firefox" else Options()
         selenoid_capabilities = {
