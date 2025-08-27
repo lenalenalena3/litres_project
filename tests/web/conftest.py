@@ -65,7 +65,7 @@ def web_management(request, context):
         settings.BASE_URL = url_option
     url_api_option = request.config.getoption("--base_url_api")
     if url_api_option is not None:
-        settings.BASE_URL = url_api_option
+        settings.BASE_URL_API = url_api_option
 
     options = config.driver_options(settings, context)
     if context == 'selenoid':
