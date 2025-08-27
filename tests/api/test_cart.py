@@ -12,7 +12,7 @@ class TestCart:
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
-    @allure.title("Личный кабинет: Добавление в корзину")
+    @allure.title("API: PUT_cart_add: Личный кабинет: Добавление в корзину")
     @allure.description(
         "1. Отправить запрос PUT_add_cart \n"
         "2. Проверить ответ:\n"
@@ -37,7 +37,7 @@ class TestCart:
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
-    @allure.title("Личный кабинет: Удаление из корзины")
+    @allure.title("API: PUT_cart_remove: Личный кабинет: Удаление из корзины")
     @allure.description(
         "1. Отправить запрос PUT_cart_remove \n "
         "2. Проверить ответ:\n"

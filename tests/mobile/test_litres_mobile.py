@@ -13,7 +13,7 @@ text = "Красная корова"
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
-@allure.title("Личный кабинет: Добавление в избранное")
+@allure.title("MOBILE: Личный кабинет: Добавление в избранное")
 @allure.description(
     "1. Найти по поиску книгу \n"
     "2. Добавить книгу в список избранных \n"
@@ -37,7 +37,7 @@ def test_add_favorite(open_app):
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
-@allure.title("Книжная страница: Просмотр оглавления")
+@allure.title("MOBILE: Книжная страница: Просмотр оглавления")
 @allure.description(
     "1. Найти по поиску книгу \n"
     "2. Открыть книгу \n"
@@ -60,7 +60,7 @@ def test_open_contents(open_app):
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
-@allure.title("Главная страница: Проверка признака прочитана/не прочитана")
+@allure.title("MOBILE: Главная страница: Проверка признака прочитана/не прочитана")
 @allure.description(
     "1. Найти по поиску книгу \n"
     "2. Отметить книгу прочитанной \n"

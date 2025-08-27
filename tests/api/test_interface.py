@@ -10,7 +10,7 @@ from litres_project.helpers.helper import verify_response_text
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression", "api")
-@allure.title("Главное меню: Проверка подсказок для строки поиска")
+@allure.title("API: GET_suggestions: Главное меню: Проверка подсказок для строки поиска")
 @allure.description(
     "1. Отправить запрос GET_suggestions \n "
     "2. Проверить ответ:\n"

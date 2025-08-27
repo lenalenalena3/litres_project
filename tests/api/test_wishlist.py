@@ -14,7 +14,7 @@ class TestWishlist:
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
-    @allure.title("Личный кабинет: Добавление в список 'Отложено'")
+    @allure.title("API: PUT_wishlist: Личный кабинет: Добавление в список 'Отложено'")
     @allure.description(
         "1. Отправить запрос PUT_wishlist \n"
         "2. Проверить ответ: \n "
@@ -32,7 +32,7 @@ class TestWishlist:
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
-    @allure.title("Личный кабинет: Удаление из списка 'Отложено'")
+    @allure.title("API: DELETE_wishlist: Личный кабинет: Удаление из списка 'Отложено'")
     @allure.description(
         "1. Отправить запрос DELETE_wishlist \n"
         "2. Проверить ответ: \n"
@@ -49,7 +49,7 @@ class TestWishlist:
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
-    @allure.title("Личный кабинет: Удаление из списка 'Отложено' несуществующей книги")
+    @allure.title("API: DELETE_wishlist: Личный кабинет: Удаление из списка 'Отложено' несуществующей книги")
     @allure.description(
         "1. Отправить запрос DELETE_wishlist с несуществующим id \n"
         "2. Проверить ответ: \n"

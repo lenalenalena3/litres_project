@@ -34,10 +34,14 @@ class APIHelper:
         return response
 
     @allure.step("Сверить со схемой")
-    def validate_schema(self, response, name_schema):
+    def validate_schema(self, response_or_data, name_schema):
+        if hasattr(response_or_data, 'json'):
+            data = response_or_data.json()
+        else:
+            data = response_or_data
         with open(resource.path_schema(name_schema)) as file:
             schema = json.load(file)
-            validate(response.json(), schema=schema)
+            validate(data, schema=schema)
 
     @allure.step("Проверить: response.status_code == {status_code}")
     def check_status_code(self, response, status_code):
@@ -69,21 +73,3 @@ class APIHelper:
         payload = {"art_ids": [id_book]}
         response = self.api_request(session=session, endpoint=endpoint, method="PUT", payload=payload)
         return response
-
-    # @allure.step("GET: status")
-    # def api_get_status(self,session, field, count):
-    #     endpoint = f"/users/me/arts/stats"
-    #     response = self.api_request(session=session, endpoint=endpoint, method="GET")
-    #     self.check_status_code(response, 200)
-    #     self.validate_schema(response, 'get_status.json')
-    #     json_data = response.json()
-    #     with allure.step(f"Проверить в response: {field} == {count}"):
-    #         assert json_data['payload']['data'][field] == count, \
-    #             f"Ожидалось {count}, получено {json_data['payload']['data'][field]}"
-    #
-    #
-    # @allure.step("POST: folders для {name_folders}")
-    # def api_post_folders(self, session, name_folders):
-    #     endpoint = "/users/me/folders"
-    #     response = self.api_request(session=session, endpoint=endpoint, method="POST")
-    #     self.check_status_code(response, 204)
