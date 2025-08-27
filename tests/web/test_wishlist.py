@@ -10,7 +10,7 @@ class TestWishlist:
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression")
-    @allure.title("Личный кабинет: Добавление книги в список 'Отложено'")
+    @allure.title("WEB: Личный кабинет: Добавление книги в список 'Отложено'")
     @allure.description(
         "1. Открыть главную страницу \n"
         "2. Проверить, что список 'Отложено' пуст \n"
@@ -38,7 +38,7 @@ class TestWishlist:
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression")
-    @allure.title("Личный кабинет: Удаление книги из списка 'Отложено'")
+    @allure.title("WEB: Личный кабинет: Удаление книги из списка 'Отложено'")
     @allure.description(
         "Предусловие: в списке 'Отложено' есть две книги.\n"
         "1. Открыть главную страницу \n"

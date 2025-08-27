@@ -10,7 +10,7 @@ class TestCart:
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("smoke", "regression")
-    @allure.title("Личный кабинет: Добавление книги в корзину")
+    @allure.title("WEB: Личный кабинет: Добавление книги в корзину")
     @allure.description(
         "1. Открыть главную страницу \n"
         "2. Проверить, что корзина пустая \n"
@@ -38,7 +38,7 @@ class TestCart:
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("smoke", "regression")
-    @allure.title("Личный кабинет: Удаление книги из корзины")
+    @allure.title("WEB: Личный кабинет: Удаление книги из корзины")
     @allure.description(
         "Предусловие: в 'Корзине' есть две книги. \n"
         "1. Открыть главную страницу \n"

@@ -10,7 +10,7 @@ from litres_project.utils.resource import load_data_json
 @allure.severity(Severity.NORMAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("regression")
-@allure.title("Книжная страница: Просмотр оглавления")
+@allure.title("WEB: Книжная страница: Просмотр оглавления")
 @allure.description(
     "1. Открыть главную страницу \n"
     "2. Найти по поиску книгу \n"

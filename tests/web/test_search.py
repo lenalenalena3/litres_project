@@ -9,7 +9,7 @@ from litres_project.pages.application import app
 @allure.severity(Severity.CRITICAL)
 @allure.label("owner", "Tinkalyuk")
 @allure.tag("smoke", "regression")
-@allure.title("Главное меню: Проверка поиска")
+@allure.title("WEB: Главное меню: Проверка поиска")
 @allure.description(
     "1. Открыть главную страницу \n"
     "2. Найти по поиску книгу \n"

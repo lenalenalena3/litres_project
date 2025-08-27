@@ -10,7 +10,7 @@ class TestInterface:
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("smoke", "regression")
-    @allure.title("Главное меню: Проверка названий верхнего меню")
+    @allure.title("WEB: Главное меню: Проверка названий верхнего меню")
     @allure.description(
         "1. Открыть главную страницу\n"
         "2. Проверить верхнее меню")
