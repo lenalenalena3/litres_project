@@ -11,8 +11,8 @@ from allure_commons.types import Severity
 @allure.title("API: POST_login_available: Авторизация: доступность логина: логин занят")
 @allure.description(
     "1. Отправить запрос POST_login_available: \n "
-     " - сверить с схемой запрос post_login_available_request.json,\n"
-     " - отправить запрос post_login_available_request.json\n"
+    " - сверить с схемой запрос post_login_available_request.json,\n"
+    " - отправить запрос post_login_available_request.json\n"
     "2. Проверить ответ:\n"
     " - проверить статус код,\n"
     " - сверить с схемой post_login-available.json,\n"
@@ -31,6 +31,7 @@ def test_api_post_login_available_false(api_session, helper_api):
         with allure.step(f"Проверить в response: {field} = False"):
             assert json_data['payload']['data'][field] == False
 
+
 @allure.epic("API")
 @allure.feature("Личный кабинет")
 @allure.story("Авторизация")
@@ -40,8 +41,8 @@ def test_api_post_login_available_false(api_session, helper_api):
 @allure.title("API: POST_login_available: Авторизация: доступность логина: логин свободен")
 @allure.description(
     "1. Отправить запрос POST_login_available: \n "
-     " - сверить с схемой запрос post_login_available_request.json,\n"
-     " - отправить запрос post_login_available_request.json\n"
+    " - сверить с схемой запрос post_login_available_request.json,\n"
+    " - отправить запрос post_login_available_request.json\n"
     "2. Проверить ответ:\n"
     " - проверить статус код,\n"
     " - сверить с схемой post_login-available.json,\n"

@@ -70,7 +70,7 @@ Mobile:
 <!-- Allure report -->
 
 ### <img width="3%" title="Allure Report" src="images/allure_report.png"> Allure report
-UI:
+WEB:
 ![This is an image](images/allure_web.jpg)
 API:
 ![This is an image](images/allure_api.jpg)

@@ -33,7 +33,6 @@ class TestCart:
                 assert json_data['payload']['data'][field] == [int(id_book)], \
                     f"Ожидалось {id_book}, получено {json_data['payload']['data'][field]}"
 
-
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
     @allure.tag("regression", "api")
