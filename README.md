@@ -62,6 +62,8 @@ Mobile:
 
 ### <img width="3%" title="Jenkins" src="images/jenkins.png"> Запуск проекта в Jenkins
 ### [Задача в jenkins для WEB тестов](https://jenkins.autotests.cloud/job/guru20_homework22_web/)
+Для запуска можно менять параметры:
+![This is an image](images/jenkins_web.jpg)
 ### [Задача в jenkins для API тестов](https://jenkins.autotests.cloud/job/guru20_homework22_api/)
 ### [Задача в jenkins для Mobile тестов](https://jenkins.autotests.cloud/job/guru20_homework22_mob/)
 

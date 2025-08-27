@@ -28,12 +28,12 @@ def pytest_addoption(parser):
     parser.addoption(
         "--base_url",
         default=None,
-        help="Укажите BASE_URL (TEST, PROD)"
+        help="Укажите BASE_URL (TEST, DEV)"
     )
     parser.addoption(
         "--base_url_api",
         default=None,
-        help="Укажите BASE_URL_API (TEST, PROD)"
+        help="Укажите BASE_URL_API (TEST, DEV)"
     )
     parser.addoption(
         "--browser_name_version",
