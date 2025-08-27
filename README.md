@@ -1,6 +1,6 @@
 # litres_project
 
-<img src="images/litres_web.jpg" alt="Image litres_web" width="550"><img src="images/litres_mobile.jpg" alt="litres_mobile" width="200">
+<img src="images/litres_web.jpg" alt="Image litres_web" width="600"><img src="images/litres_mobile.jpg" alt="litres_mobile" width="200">
 
 ## Дипломный проект
 
