@@ -1,6 +1,6 @@
 # litres_project
 
-<img src="images/litres_web.jpg" alt="Image litres_web" width="400"><img src="images/litres_mobile.jpg" alt="litres_mobile" width="200">
+<img src="images/litres_web.jpg" alt="Image litres_web" width="550"><img src="images/litres_mobile.jpg" alt="litres_mobile" width="200">
 
 ## Дипломный проект
 
@@ -100,7 +100,7 @@ Mobile:
 
 
 ## Видео запуска тестов
-### <img src="images/selenoid.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска UI-теста в Selenoid
+### <img src="images/selenoid.png" width="25" height="25" alt="Jenkins"/></a> Видео запуска WEB-теста в Selenoid
 <p align="center">
 <img title="Книжная страница: Просмотр оглавления" src="images/test_web.gif">
 </p>
