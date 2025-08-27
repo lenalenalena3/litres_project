@@ -25,6 +25,21 @@ def pytest_addoption(parser):
         default=None,
         help="Укажите файл настроек: selenoid, local_web"
     )
+    parser.addoption(
+        "--base_url",
+        default=None,
+        help="Укажите BASE_URL (TEST, PROD)"
+    )
+    parser.addoption(
+        "--base_url_api",
+        default=None,
+        help="Укажите BASE_URL_API (TEST, PROD)"
+    )
+    parser.addoption(
+        "--browser_name_version",
+        default=None,
+        help="Укажите браузер с версией (chrome:128.0, firefox:125.0)"
+    )
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -40,6 +55,18 @@ def context(request):
 @pytest.fixture(scope='function', autouse=True)
 def web_management(request, context):
     settings = config.get_settings(context)
+
+    browser_option = request.config.getoption("--browser_name_version")
+    if browser_option is not None:
+        settings.BROWSER_NAME = browser_option.split(':', 1)[0].strip()
+        settings.BROWSER_VERSION = browser_option.split(':', 1)[1].strip()
+    url_option = request.config.getoption("--base_url")
+    if url_option is not None:
+        settings.BASE_URL = url_option
+    url_api_option = request.config.getoption("--base_url_api")
+    if url_api_option is not None:
+        settings.BASE_URL = url_api_option
+
     options = config.driver_options(settings, context)
     if context == 'selenoid':
         selenoid_url = settings.SELENOID_URL
