@@ -49,7 +49,7 @@ def test_open_contents(open_app):
         index = 0
         app_mobile.search_page_mobile.open_book(index)
     with step('Проверить оглавление'):
-        list_book = load_data_json('contents_mobile.json')
+        list_book = load_data_json('contents_red_cow.json')
         contents = list_book['contents']
         app_mobile.book_page_mobile.should_contents(contents)
 

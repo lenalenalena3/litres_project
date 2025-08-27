@@ -27,6 +27,6 @@ def test_view_contents(web_management):
         app.search_page.open_info_book(index_book)
         app.menu_page.switch_tab()
     with allure.step("Проверить оглавление"):
-        list_book = load_data_json('contents.json')
+        list_book = load_data_json('contents_alisa.json')
         contents = list_book['contents']
         app.book_page.should_contents(contents)
