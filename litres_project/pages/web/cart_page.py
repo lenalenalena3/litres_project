@@ -17,20 +17,14 @@ class CartPage:
         return self._list_cart.element(index).element(f'[data-testid*="cart__{field}"]').should(
             be.visible).get(query.text)
 
-    def get_name_book(self, index):
-        return self.get_field_book(index, 'bookCardTitle')
-
-    def get_id_book(self, index):
-        href = self._list_cart.element(index).element(f'[data-testid*="cart__bookCardTitle"]> a').should(
-            be.visible).get(query.attribute('href'))
-        return extract_book_id(href)
-
     def get_info_book(self, index):
         book = Book()
-        book.name = self.get_name_book(index)
+        book.name = self.get_field_book(index, 'bookCardTitle')
         book.author = self.get_field_book(index, 'bookCardAuthor')
         book.price = self.get_field_book(index, 'bookCardDiscount')
-        book.id = self.get_id_book(index)
+        book.id = extract_book_id(
+            self._list_cart.element(index).element(f'[data-testid*="cart__bookCardTitle"]> a').should(
+                be.visible).get(query.attribute('href')))
         info_attaching(book, "Book")
         return book
 
@@ -46,20 +40,24 @@ class CartPage:
             f"Несовпадение: {actual_count} != {count_book}"
 
     @allure.step("На странице 'Корзина' проверить список книг по id")
-    def should_cart_result_id(self, count_book, list_book):
+    def should_cart_by_id(self, count_book, list_book):
         self.should_count_result(count_book)
         with (allure.step("Проверить id книг")):
             for i in range(len(list_book)):
-                assert self.get_id_book(i) == list_book[i], \
-                    f"Несовпадение в элементе {i}: {self.get_id_book(i)} != {list_book[i]}"
+                actual_book = self.get_info_book(i)
+                expected_book = list_book[i]
+                assert actual_book.equals_by_id(expected_book), \
+                    f"Несовпадение в элементе {i}: {actual_book.id} != {expected_book.id}"
 
     @allure.step("На странице 'Корзина' проверить список книг по названию")
-    def should_cart_result_name(self, count_book, list_book):
+    def should_cart_by_name(self, count_book, list_book):
         self.should_count_result(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
-                assert self.get_name_book(i) == list_book[i], \
-                    f"Несовпадение в элементе {i}: '{self.get_name_book(i)}' != '{list_book[i]}'"
+                actual_book = self.get_info_book(i)
+                expected_book = list_book[i]
+                assert actual_book.equals_by_name(expected_book), \
+                    f"Несовпадение в элементе {i}: {actual_book.name} != {expected_book.name}"
 
     @allure.step("На странице 'Корзина' для книги {index} нажать на кнопку 'Удалить'")
     def del_cart(self, index):

@@ -33,7 +33,7 @@ class TestWishlist:
         with allure.step("Проверить список 'Отложено'"):
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()
-            app.favorite_page.should_favorite_by_name(1, [book.name])
+            app.favorite_page.should_favorite_by_name(1, [book])
 
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
@@ -56,11 +56,11 @@ class TestWishlist:
             app.favorite_page.open_favorite()
         with allure.step("Проверить список 'Отложено'"):
             list_book = []
-            list_book.append(book_del.id)
-            list_book.append(book.id)
+            list_book.append(book_del)
+            list_book.append(book)
             app.favorite_page.should_favorite_by_id(2, list_book)
         with allure.step("Удалить одну книгу"):
             index_book = 0
             app.favorite_page.del_favorite(index_book)
         with allure.step("Проверить список 'Отложено'"):
-            app.favorite_page.should_favorite_by_id(1, [book.id])
+            app.favorite_page.should_favorite_by_id(1, [book])

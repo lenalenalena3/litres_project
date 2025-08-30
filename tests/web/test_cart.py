@@ -33,7 +33,7 @@ class TestCart:
             app.book_page.add_to_cart()
         with allure.step("Проверить корзину"):
             app.menu_page.open_cart()
-            app.cart_page.should_cart_result_name(1, [book.name])
+            app.cart_page.should_cart_by_name(1, [book])
 
     @allure.severity(Severity.CRITICAL)
     @allure.label("owner", "Tinkalyuk")
@@ -55,11 +55,11 @@ class TestCart:
             app.menu_page.open_cart()
         with allure.step("Проверить корзину"):
             list_book = []
-            list_book.append(book_del.id)
-            list_book.append(book.id)
-            app.cart_page.should_cart_result_id(2, list_book)
+            list_book.append(book_del)
+            list_book.append(book)
+            app.cart_page.should_cart_by_id(2, list_book)
         with allure.step("Удалить одну книгу"):
             index_book = 0
             app.cart_page.del_cart(index_book)
         with allure.step("Проверить корзину"):
-            app.cart_page.should_cart_result_id(1, [book.id])
+            app.cart_page.should_cart_by_id(1, [book])

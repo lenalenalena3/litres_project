@@ -19,11 +19,9 @@ class WebSettings(BaseSettings):
         env_file = self.model_config.get('env_file', '.env')
         abs_env_path = abs_path_from_project(env_file)
         print(f"\n[Конфигурация] Загружаем настройки из файла: {abs_env_path}")
-        print(f"[Конфигурация] Файл существует: {Path(abs_env_path).absolute().exists()}")
         kwargs['_env_file'] = abs_env_path
         kwargs['_env_file_encoding'] = 'utf-8'
         super().__init__(**kwargs)
-        print("[Конфигурация] Настройки успешно загружены\n")
 
     model_config = SettingsConfigDict(
         env_file_encoding='utf-8',

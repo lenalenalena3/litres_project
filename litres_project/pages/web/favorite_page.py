@@ -20,20 +20,13 @@ class FavoritePage:
         return self._list_favorites.element(index).element(f'[data-testid*="{field}"').should(
             be.visible).get(query.text)
 
-    def get_name_book(self, index):
-        return self.get_field_book(index, 'title')
-
-    def get_id_book(self, index):
-        href = self._list_favorites.element(index).element(f'[data-testid*="title"').should(
-            be.visible).get(query.attribute('href'))
-        return extract_book_id(href)
-
     def get_info_book(self, index):
         book = Book()
-        book.name = self.get_name_book(index)
+        book.name = self.get_field_book(index, 'title')
         book.author = self.get_field_book(index, 'authorName')
         book.price = self.get_field_book(index, 'finalPrice')
-        book.id = self.get_id_book(index)
+        book.id = extract_book_id(self._list_favorites.element(index).element(f'[data-testid*="title"').should(
+            be.visible).get(query.attribute('href')))
         info_attaching(book, "Book")
         return book
 
@@ -65,14 +58,17 @@ class FavoritePage:
         self.should_count_result(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
-                assert self.get_name_book(i) == list_book[i], \
-                    f"Несовпадение в элементе {i}: '{self.get_name_book(i)}' != '{list_book[i]}'"
+                actual_book = self.get_info_book(i)
+                expected_book = list_book[i]
+                assert actual_book.equals_by_name(expected_book), \
+                    f"Несовпадение в элементе {i}: {actual_book.name} != {expected_book.name}"
 
     @allure.step("На странице 'Мои книги' проверить список книг по id")
     def should_favorite_by_id(self, count_book, list_book):
         self.should_count_result(count_book)
         with (allure.step("Проверить id книг")):
             for i in range(len(list_book)):
-                self.get_info_book(i)
-                assert self.get_id_book(i) == list_book[i], \
-                    f"Несовпадение в элементе {i}: {self.get_id_book(i)} != {list_book[i]}"
+                actual_book = self.get_info_book(i)
+                expected_book = list_book[i]
+                assert actual_book.equals_by_id(expected_book), \
+                    f"Несовпадение в элементе {i}: {actual_book.id} != {expected_book.id}"

@@ -13,7 +13,7 @@ class Book:
         self.id = id
 
     def __hash__(self):
-        return hash(self.name)
+        return hash((self.name, self.author))
 
     def __repr__(self):
         return f"Book(name='{self.name}', author='{self.author}', price='{self.price}', id='{self.id}')"
@@ -21,12 +21,14 @@ class Book:
     def __eq__(self, other):
         if not isinstance(other, Book):
             return False
-        return self.name == other.name
+        return self.name == other.name and self.author == other.author
 
-    def full_equals(self, other):
+    def equals_by_id(self, other):
         if not isinstance(other, Book):
             return False
-        return (self.name == other.name and
-                self.author == other.author and
-                self.price == other.price and
-                self.id == other.id)
+        return self.id == other.id
+
+    def equals_by_name(self, other):
+        if not isinstance(other, Book):
+            return False
+        return self.name == other.name
