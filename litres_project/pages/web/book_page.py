@@ -26,7 +26,7 @@ class BookPage:
 
     @allure.step("Проверить оглавление")
     def should_contents(self, list_book):
-        self._contents.should(be.visible).click()
+        self._contents.should(be.clickable).click()
         count_list_actual = len(self._list_contents)
         count_list_expected = len(list_book)
         assert count_list_actual == count_list_expected, \

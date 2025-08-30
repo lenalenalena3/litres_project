@@ -17,7 +17,7 @@ class SearchPageMobile:
 
     @allure.step("В поисковой строке ввести {text}")
     def search(self, text):
-        self._search_button.should(be.visible).click()
+        self._search_button.should(be.clickable).click()
         self._search_input.should(be.visible).send_keys(text)
         browser.driver.press_keycode(66)
 
@@ -42,7 +42,7 @@ class SearchPageMobile:
     def add_favorite(self, index_book):
         self._list_books.element(index=index_book).element((AppiumBy.XPATH,
                                                             './/android.widget.ImageView[@resource-id="ru.litres.android:id/imageViewFavorite"]')).should(
-            be.visible).click()
+            be.clickable).click()
         return self.get_info_book(index_book)
 
     @allure.step("Пометить книгу с индексом {index_book} как прочитанную")
@@ -51,8 +51,8 @@ class SearchPageMobile:
         self._list_books.element(index=index_book).element(
             (AppiumBy.XPATH,
              './/android.widget.ImageView[@resource-id="ru.litres.android:id/imageTripleDots"]')).should(
-            be.visible).click()
-        self._mark_read_button.should(be.visible).click()
+            be.clickable).click()
+        self._mark_read_button.should(be.clickable).click()
 
     @allure.step("Для книги {index_book} проверить признак 'прочитана' = {visible}")
     def check_mark_read(self, index_book, visible):

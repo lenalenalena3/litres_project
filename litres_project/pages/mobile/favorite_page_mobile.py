@@ -14,8 +14,8 @@ class FavoritePageMobile:
 
     @allure.step("Открыть список избранных книг")
     def open_favorite(self):
-        self._my_books_button.should(be.visible).click()
-        self._favorite_button.should(be.visible).click()
+        self._my_books_button.should(be.clickable).click()
+        self._favorite_button.should(be.clickable).click()
 
     @allure.step("Проверить количество книг в избранном")
     def should_count_result(self, count_book):

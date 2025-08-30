@@ -29,11 +29,11 @@ class MenuPage:
 
     @allure.step("На главной странице в верхнем меню кликнуть на кнопку 'Мои книги'")
     def open_my_books(self):
-        self._my_books.should(be.visible).click()
+        self._my_books.should(be.clickable).click()
 
     @allure.step("На главной странице в верхнем меню кликнуть на кнопку 'Корзина'")
     def open_cart(self):
-        self._cart.should(be.visible).click()
+        self._cart.should(be.clickable).click()
 
     @allure.step("Проверить главное меню")
     def should_horizontal_menu(self):
@@ -98,7 +98,7 @@ class MenuPage:
         with allure.step("Проверить скрытое меню {count_hidden}"):
             actual_list_menu_hidden = actual_list_menu[-count_hidden:]
             info_attaching(actual_list_menu_hidden)
-            self._menu_dop.should(be.visible).click()
+            self._menu_dop.should(be.clickable).click()
             with check:
                 self._menu_dop_elements.should(have.exact_texts(actual_list_menu_hidden))
 
