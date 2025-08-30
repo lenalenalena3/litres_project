@@ -1,10 +1,12 @@
-class Book:
-    name: str
-    author: str
-    price: str
-    id: str
+from typing import Optional
 
-    def __init__(self, name: str = None, author: str = None, price: str = None, id: str = None):
+
+class Book:
+    def __init__(self,
+                 name: Optional[str] = None,
+                 author: Optional[str] = None,
+                 price: Optional[str] = None,
+                 id: Optional[str] = None):
         self.name = name
         self.author = author
         self.price = price
@@ -14,9 +16,14 @@ class Book:
         return hash(self.name)
 
     def __repr__(self):
-        return f"Book(name='{self.name}', author={self.author}, price={self.price}, id={self.id})"
+        return f"Book(name='{self.name}', author='{self.author}', price='{self.price}', id='{self.id}')"
 
     def __eq__(self, other):
+        if not isinstance(other, Book):
+            return False
+        return self.name == other.name
+
+    def full_equals(self, other):
         if not isinstance(other, Book):
             return False
         return (self.name == other.name and

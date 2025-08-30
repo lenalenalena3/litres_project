@@ -48,9 +48,9 @@ class TestCart:
         "5. Проверить корзину")
     def test_del_cart(self, web_management, api_session_add_cart):
         with allure.step("Открыть главную страницу"):
-            api_session, book_del, book = api_session_add_cart
+            session, book_del, book = api_session_add_cart
             app.menu_page.open_main_page()
-            app.menu_page.refresh_cookies(api_session)
+            app.menu_page.refresh_cookies(session)
         with allure.step("Открыть корзину"):
             app.menu_page.open_cart()
         with allure.step("Проверить корзину"):

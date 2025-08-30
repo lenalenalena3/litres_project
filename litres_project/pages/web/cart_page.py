@@ -63,7 +63,8 @@ class CartPage:
 
     @allure.step("На странице 'Корзина' для книги {index} нажать на кнопку 'Удалить'")
     def del_cart(self, index):
+        book = self.get_info_book(index)
         self._list_cart.element(index).element('[data-testid="cart__listDeleteButton"]').should(
             be.visible).click()
         self._cart_favorite_context_menu.should(be.visible).click()
-        return self.get_info_book(index)
+        return book

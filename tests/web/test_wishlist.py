@@ -48,9 +48,9 @@ class TestWishlist:
         "5. Проверить список 'Отложено'")
     def test_del_wishlist(self, web_management, api_session_add_wishlist):
         with allure.step("Открыть главную страницу"):
-            api_session, book, book_del = api_session_add_wishlist
+            session, book, book_del = api_session_add_wishlist
             app.menu_page.open_main_page()
-            app.menu_page.refresh_cookies(api_session)
+            app.menu_page.refresh_cookies(session)
         with allure.step("Открыть список 'Отложено'"):
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()

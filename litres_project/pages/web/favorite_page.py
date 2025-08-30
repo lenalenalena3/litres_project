@@ -43,11 +43,12 @@ class FavoritePage:
 
     @allure.step("На странице 'Мои книги' для книги {index} нажать на пункт меню 'Убрать из отложенного'")
     def del_favorite(self, index):
+        book = self.get_info_book(index)
         self._list_favorites.element(index).element('[aria-label="Меню"]').should(
             be.visible).click()
         self._del_favorite_context_menu.should(
             be.visible).click()
-        return self.get_info_book(index)
+        return book
 
     @allure.step("На странице 'Мои книги' проверить: количество книг ={count_book}")
     def should_count_result(self, count_book):
