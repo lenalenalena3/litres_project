@@ -9,19 +9,15 @@ from litres_project.utils.logging import info_attaching, current_url_attaching, 
 
 class MenuPage:
     def __init__(self):
-        self.menu = browser.element('#lowerMenuWrap')
-        self._menu_elements = self.menu.all('[data-testid*="lowerMenu__item"][aria-hidden="false"]')
-        self._menu_dop = self.menu.element('[data-testid*="lower-menu__more-button"] > a')
-        self._menu_dop_elements = self.menu.all('[data-testid*="lowerMenu_moreItem"] > div')
+        self._menu = browser.element('#lowerMenuWrap')
+        self._menu_elements = self._menu.all('[data-testid*="lowerMenu__item"][aria-hidden="false"]')
+        self._menu_dop = self._menu.element('[data-testid*="lower-menu__more-button"] > a')
+        self._menu_dop_elements = self._menu.all('[data-testid*="lowerMenu_moreItem"] > div')
         self._search = browser.element('//form[@action="/search/"]')
         self._search_input = self._search.element('.//input')
         self._search_elements = browser.all('[data-testid="search__content--wrapper"] > div')
         self._cart = browser.element('[data-testid="tab-basket"] > a')
         self._my_books = browser.element('[data-testid="tab-myBooks"] > a')
-
-    def get_name_book(self, index):
-        return self._search_elements.element(index).element('./a').should(be.visible).get(
-            query.attribute('aria-label'))
 
     def add_favorite(self, index):
         self._search_elements.element(index).element('./a').should(be.visible).get(query.attribute('aria-label'))
@@ -35,7 +31,7 @@ class MenuPage:
     def open_my_books(self):
         self._my_books.should(be.visible).click()
 
-    @allure.step("На главной страницу в верхнем меню кликнуть на кнопку 'Корзина'")
+    @allure.step("На главной странице в верхнем меню кликнуть на кнопку 'Корзина'")
     def open_cart(self):
         self._cart.should(be.visible).click()
 

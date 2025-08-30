@@ -14,14 +14,15 @@ class BookPage:
         try:
             self._modal_windows_action.with_(timeout=10).should(be.visible)
             return True
-        except:
+        except AssertionError:
             return False
 
     @allure.step("Нажать на кнопку 'Добавить в корзину'")
     def add_to_cart(self):
-        self._add_to_cart_button.should(be.visible).click()
+        self._add_to_cart_button.should(be.clickable).click()
         if self.modal_window_visible():
-            self._modal_windows_action_close.click()
+            self._modal_windows_action_close.should(be.clickable).click()
+            self._modal_windows_action.with_(timeout=5).should(be.not_.visible)
 
     @allure.step("Проверить оглавление")
     def should_contents(self, list_book):

@@ -11,8 +11,6 @@ class FavoritePage:
     def __init__(self):
         self._list_favorites = browser.all('[data-testid="art__wrapper"]')
         self._favorite = browser.element('//*[@data-testid="icon_wishlist"]/parent::*')
-        self._favorite_count = self._favorite.element(
-            './following-sibling::span[@data-testid="navigation__tabItem__counter"]')
         self._context_menu = browser.element('[data-testid="overlay__container"]')
         self._del_favorite_context_menu = self._context_menu.element('[data-testid="icon_favorites"]')
 

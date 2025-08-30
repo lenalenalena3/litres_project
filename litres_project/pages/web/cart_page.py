@@ -10,8 +10,7 @@ from litres_project.utils.logging import info_attaching
 class CartPage:
     def __init__(self):
         self._list_cart = browser.all('[data-testid*="cart__listItem"]')
-        self._cart_favorite_context_menu = browser.element(
-            '//*[@data-testid="cart__modalDeleteArt"]//button')
+        self._cart_favorite_context_menu = browser.element('//*[@data-testid="cart__modalDeleteArt"]//button')
 
     def get_field_book(self, index, field):
         return self._list_cart.element(index).element(f'[data-testid*="cart__{field}"]').should(

@@ -18,23 +18,16 @@ class SearchPage:
     def get_name_book(self, index):
         return self.get_field_text_book(index, 'title')
 
-    def get_id_book(self, index):
-        href = self._list_search.element(index).element(f'[data-testid="art__title"').should(be.visible).get(
-            query.attribute('href'))
-        return extract_book_id(href)
-
     def get_info_book(self, index):
         book = Book()
         book.name = self.get_name_book(index)
         book.author = self.get_field_text_book(index, 'authorName')
         book.price = self.get_field_text_book(index, 'finalPrice')
-        book.id = self.get_id_book(index)
+        book.id = extract_book_id(
+            self._list_search.element(index).element(f'[data-testid="art__title"').should(be.visible).get(
+                query.attribute('href')))
         info_attaching(book, "Book")
         return book
-
-    def check_not_favorite(self, index):
-        return self._list_search.element(index).element('.//button').should(be.visible).get(
-            query.attribute('aria-label')) == "Отложить"
 
     @allure.step("Добавить в избранное товар с индексом {index}")
     def add_favorite(self, index):
@@ -47,7 +40,7 @@ class SearchPage:
         return self.get_info_book(index)
 
     @allure.step("Проверить результат поиска")
-    def should_search_result_name(self, text):
+    def should_search_by_name(self, text):
         with allure.step("Проверить, что количество строк > 0"):
             try:
                 WebDriverWait(self, 10).until(
