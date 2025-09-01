@@ -69,8 +69,6 @@ def web_management(request, context):
 
     options = config.driver_options(settings, context)
     if context == 'selenoid':
-        selenoid_url = settings.SELENOID_URL
-
         credentials_path = abs_path_from_project('.env.selenoid_credentials')
         print(f"Загружаем credentials из: {credentials_path}")
         if not Path(credentials_path).exists():
@@ -82,14 +80,16 @@ def web_management(request, context):
             raise ValueError("SELENOID_LOGIN и SELENOID_PASS не установлены")
 
         driver = webdriver.Remote(
-            command_executor=f"https://{selenoid_login}:{selenoid_pass}@{selenoid_url}/wd/hub",
+            command_executor=f"https://{selenoid_login}:{selenoid_pass}@{settings.SELENOID_URL}/wd/hub",
             options=options
         )
-    if context == 'local_web':
+    elif context == 'local_web':
         if settings.BROWSER_NAME.lower() == "firefox":
             driver = webdriver.Firefox(options=options)
         else:
             driver = webdriver.Chrome(options=options)
+    else:
+        raise ValueError(f"Неизвестный контекст: {context}")
 
     browser.config.driver = driver
     browser.config.window_width = 1920
@@ -104,7 +104,7 @@ def web_management(request, context):
     attach.add_logs(browser)
     attach.add_html(browser)
     if context == 'selenoid':
-        video_url = selenoid_url
+        video_url = settings.SELENOID_URL
         attach.add_video(browser, video_url)
     with allure.step("Закрыть браузер"):
         browser.quit()

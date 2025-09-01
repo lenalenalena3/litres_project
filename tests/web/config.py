@@ -1,5 +1,4 @@
 from typing import Literal
-from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -82,9 +81,11 @@ def driver_options(settings, context):
         options.capabilities.update(selenoid_capabilities)
         print(options.to_capabilities())
 
-    if context == 'local_web':
+    elif context == 'local_web':
         options = FirefoxOptions() if settings.BROWSER_NAME.lower() == "firefox" else Options()
         if settings.BROWSER_NAME.lower() == "firefox":
             options.set_preference("devtools.console.stdout.content", True)
             options.set_preference("browser.console.showInPanel", True)
+    else:
+        raise ValueError(f"Неизвестный контекст: {context}")
     return options
