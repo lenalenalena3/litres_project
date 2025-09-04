@@ -29,12 +29,12 @@ class SearchPage:
         info_attaching(book, "Book")
         return book
 
-    @allure.step("Добавить в избранное товар с индексом {index}")
+    @allure.step("Добавить в избранное книгу с индексом {index}")
     def add_favorite(self, index):
         self._list_search.element(index).element('.//button').should(be.clickable).click()
         return self.get_book_info(index)
 
-    @allure.step("Открыть товар с индексом {index}")
+    @allure.step("Открыть книгу с индексом {index}")
     def open_info_book(self, index):
         self._list_search.element(index).element('[data-testid="art__title"]').should(be.clickable).click()
         return self.get_book_info(index)

@@ -27,8 +27,8 @@ class CartPage:
         info_attaching(book, "Book")
         return book
 
-    @allure.step("На странице 'Корзина' проверить количество товаров")
-    def should_count_result(self, count_book):
+    @allure.step("На странице 'Корзина' проверить количество книг")
+    def check_books_count(self, count_book):
         try:
             WebDriverWait(self, 10).until(
                 lambda _: len(self._list_cart) == count_book
@@ -40,7 +40,7 @@ class CartPage:
 
     @allure.step("На странице 'Корзина' проверить список книг по id")
     def should_cart_by_id(self, count_book, list_book):
-        self.should_count_result(count_book)
+        self.check_books_count(count_book)
         with (allure.step("Проверить id книг")):
             for i in range(len(list_book)):
                 actual_book = self.get_book_info(i)
@@ -50,7 +50,7 @@ class CartPage:
 
     @allure.step("На странице 'Корзина' проверить список книг по названию")
     def should_cart_by_name(self, count_book, list_book):
-        self.should_count_result(count_book)
+        self.check_books_count(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
                 actual_book = self.get_book_info(i)
@@ -59,7 +59,7 @@ class CartPage:
                     f"Несовпадение в элементе {i}: {actual_book.name} != {expected_book.name}"
 
     @allure.step("На странице 'Корзина' для книги {index} нажать на кнопку 'Удалить'")
-    def del_cart(self, index):
+    def delete_book_from_cart(self, index):
         book = self.get_book_info(index)
         self._list_cart.element(index).element('[data-testid="cart__listDeleteButton"]').should(
             be.clickable).click()

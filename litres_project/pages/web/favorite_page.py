@@ -33,7 +33,7 @@ class FavoritePage:
         self._favorite.should(be.clickable).click()
 
     @allure.step("На странице 'Мои книги' для книги {index} нажать на пункт меню 'Убрать из отложенного'")
-    def del_favorite(self, index):
+    def delete_book_from_favorite(self, index):
         book = self.get_book_info(index)
         self._list_favorites.element(index).element('[aria-label="Меню"]').should(
             be.clickable).click()
@@ -42,7 +42,7 @@ class FavoritePage:
         return book
 
     @allure.step("На странице 'Мои книги' проверить: количество книг ={count_book}")
-    def should_count_result(self, count_book):
+    def check_books_count(self, count_book):
         try:
             WebDriverWait(self, 10).until(
                 lambda _: len(self._list_favorites) == count_book
@@ -53,7 +53,7 @@ class FavoritePage:
 
     @allure.step("На странице 'Мои книги' проверить список книг по названию")
     def should_favorite_by_name(self, count_book, list_book):
-        self.should_count_result(count_book)
+        self.check_books_count(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
                 actual_book = self.get_book_info(i)
@@ -63,7 +63,7 @@ class FavoritePage:
 
     @allure.step("На странице 'Мои книги' проверить список книг по id")
     def should_favorite_by_id(self, count_book, list_book):
-        self.should_count_result(count_book)
+        self.check_books_count(count_book)
         with (allure.step("Проверить id книг")):
             for i in range(len(list_book)):
                 actual_book = self.get_book_info(i)

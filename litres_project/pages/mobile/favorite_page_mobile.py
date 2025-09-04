@@ -18,7 +18,7 @@ class FavoritePageMobile:
         self._favorite_button.should(be.clickable).click()
 
     @allure.step("Проверить количество книг в избранном")
-    def should_count_result(self, count_book):
+    def check_books_count(self, count_book):
         try:
             WebDriverWait(self, 10).until(
                 lambda _: len(self._list_favorites) == count_book
@@ -36,7 +36,7 @@ class FavoritePageMobile:
 
     @allure.step("Проверить список книг в избранном по названию")
     def should_favorite_by_name(self, count_book, list_book):
-        self.should_count_result(count_book)
+        self.check_books_count(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
                 assert self.get_book_name(i) == list_book[i], \

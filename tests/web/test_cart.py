@@ -24,7 +24,7 @@ class TestCart:
             app.menu_page.open_main_page()
         with allure.step("Проверить, что корзина пустая"):
             app.menu_page.open_cart()
-            app.cart_page.should_count_result(0)
+            app.cart_page.check_books_count(0)
         with allure.step("Найти по поиску книгу"):
             text_search = "Красная корова Барвицкая"
             app.menu_page.search_text(text_search)
@@ -62,6 +62,6 @@ class TestCart:
             app.cart_page.should_cart_by_id(2, list_book)
         with allure.step("Удалить одну книгу"):
             index_book = 0
-            app.cart_page.del_cart(index_book)
+            app.cart_page.delete_book_from_cart(index_book)
         with allure.step("Проверить корзину"):
             app.cart_page.should_cart_by_id(1, [book])

@@ -24,7 +24,7 @@ class TestWishlist:
         with allure.step("Проверить, что список 'Отложено' пуст"):
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()
-            app.favorite_page.should_count_result(0)
+            app.favorite_page.check_books_count(0)
         with allure.step("Найти по поиску книгу"):
             text_search = "Красная корова Барвицкая"
             app.menu_page.search_text(text_search)
@@ -62,6 +62,6 @@ class TestWishlist:
             app.favorite_page.should_favorite_by_id(2, list_book)
         with allure.step("Удалить одну книгу"):
             index_book = 0
-            app.favorite_page.del_favorite(index_book)
+            app.favorite_page.delete_book_from_favorite(index_book)
         with allure.step("Проверить список 'Отложено'"):
             app.favorite_page.should_favorite_by_id(1, [book])
