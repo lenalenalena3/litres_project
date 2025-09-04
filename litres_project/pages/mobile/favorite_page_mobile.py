@@ -29,7 +29,7 @@ class FavoritePageMobile:
         assert actual_count == count_book, f"Несовпадение количества книг в избранном: {actual_count} != {count_book}"
         return actual_count
 
-    def get_name_book(self, index):
+    def get_book_name(self, index):
         return self._list_favorites.element(index).element(
             (AppiumBy.XPATH, '//android.widget.TextView[@resource-id,"ru.litres.android:id/textViewBookName"]')).should(
             be.visible).get(query.text)
@@ -39,5 +39,5 @@ class FavoritePageMobile:
         self.should_count_result(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
-                assert self.get_name_book(i) == list_book[i], \
-                    f"Несовпадение в элементе {i}: '{self.get_name_book(i)}' != '{list_book[i]}'"
+                assert self.get_book_name(i) == list_book[i], \
+                    f"Несовпадение в элементе {i}: '{self.get_book_name(i)}' != '{list_book[i]}'"

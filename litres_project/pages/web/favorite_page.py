@@ -14,15 +14,15 @@ class FavoritePage:
         self._context_menu = browser.element('[data-testid="overlay__container"]')
         self._del_favorite_context_menu = self._context_menu.element('[data-testid="icon_favorites"]')
 
-    def get_field_book(self, index, field):
+    def get_book_field(self, index, field):
         return self._list_favorites.element(index).element(f'[data-testid*="{field}"').should(
             be.visible).get(query.text)
 
-    def get_info_book(self, index):
+    def get_book_info(self, index):
         book = Book()
-        book.name = self.get_field_book(index, 'title')
-        book.author = self.get_field_book(index, 'authorName')
-        book.price = self.get_field_book(index, 'finalPrice')
+        book.name = self.get_book_field(index, 'title')
+        book.author = self.get_book_field(index, 'authorName')
+        book.price = self.get_book_field(index, 'finalPrice')
         book.id = extract_book_id(self._list_favorites.element(index).element(f'[data-testid*="title"').should(
             be.visible).get(query.attribute('href')))
         info_attaching(book, "Book")
@@ -34,7 +34,7 @@ class FavoritePage:
 
     @allure.step("На странице 'Мои книги' для книги {index} нажать на пункт меню 'Убрать из отложенного'")
     def del_favorite(self, index):
-        book = self.get_info_book(index)
+        book = self.get_book_info(index)
         self._list_favorites.element(index).element('[aria-label="Меню"]').should(
             be.clickable).click()
         self._del_favorite_context_menu.should(
@@ -56,7 +56,7 @@ class FavoritePage:
         self.should_count_result(count_book)
         with (allure.step("Проверить названия книг")):
             for i in range(len(list_book)):
-                actual_book = self.get_info_book(i)
+                actual_book = self.get_book_info(i)
                 expected_book = list_book[i]
                 assert actual_book.equals_by_name(expected_book), \
                     f"Несовпадение в элементе {i}: {actual_book.name} != {expected_book.name}"
@@ -66,7 +66,7 @@ class FavoritePage:
         self.should_count_result(count_book)
         with (allure.step("Проверить id книг")):
             for i in range(len(list_book)):
-                actual_book = self.get_info_book(i)
+                actual_book = self.get_book_info(i)
                 expected_book = list_book[i]
                 assert actual_book.equals_by_id(expected_book), \
                     f"Несовпадение в элементе {i}: {actual_book.id} != {expected_book.id}"

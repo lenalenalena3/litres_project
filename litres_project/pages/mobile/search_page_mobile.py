@@ -21,19 +21,19 @@ class SearchPageMobile:
         self._search_input.should(be.visible).send_keys(text)
         browser.driver.press_keycode(66)
 
-    def get_info_book(self, index_book):
+    def get_book_info(self, index_book):
         book = Book()
-        book.name = self.get_text_field(index_book, 'textViewBookName')
-        book.author = self.get_text_field(index_book, 'textViewAuthor')
+        book.name = self.get_book_field_text(index_book, 'textViewBookName')
+        book.author = self.get_book_field_text(index_book, 'textViewAuthor')
         info_attaching(book, "Book")
         return book
 
     @allure.step("Открыть книгу с индексом {index_book} ")
     def open_book(self, index_book):
-        self.get_info_book(index_book)
+        self.get_book_info(index_book)
         self._list_books.element(index=index_book).click()
 
-    def get_text_field(self, index_book, field):
+    def get_book_field_text(self, index_book, field):
         return self._list_books.element(index=index_book).element(
             (AppiumBy.XPATH, f'.//android.widget.TextView[@resource-id="ru.litres.android:id/{field}"]')).get(
             query.text)
@@ -43,11 +43,11 @@ class SearchPageMobile:
         self._list_books.element(index=index_book).element((AppiumBy.XPATH,
                                                             './/android.widget.ImageView[@resource-id="ru.litres.android:id/imageViewFavorite"]')).should(
             be.clickable).click()
-        return self.get_info_book(index_book)
+        return self.get_book_info(index_book)
 
     @allure.step("Пометить книгу с индексом {index_book} как прочитанную")
     def mark_read(self, index_book):
-        self.get_info_book(index_book)
+        self.get_book_info(index_book)
         self._list_books.element(index=index_book).element(
             (AppiumBy.XPATH,
              './/android.widget.ImageView[@resource-id="ru.litres.android:id/imageTripleDots"]')).should(
