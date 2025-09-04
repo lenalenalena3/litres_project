@@ -10,7 +10,7 @@ class BookPageMobile:
             (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="ru.litres.android:id/toc_title"]'))
 
     @allure.step("Проверить оглавление")
-    def should_contents(self, list_book):
+    def should_have_contents(self, list_book):
         browser.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,
                                     'new UiScrollable(new UiSelector().scrollable(true))'
                                     '.scrollIntoView(new UiSelector().resourceId("ru.litres.android:id/textViewChaptersRowRoot"))')

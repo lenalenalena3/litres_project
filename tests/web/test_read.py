@@ -30,4 +30,4 @@ def test_view_contents(web_management):
     with allure.step("Проверить оглавление"):
         list_book = load_data_json('contents_alisa.json')
         contents = list_book['contents']
-        app.book_page.should_contents(contents)
+        app.book_page.should_have_contents(contents)

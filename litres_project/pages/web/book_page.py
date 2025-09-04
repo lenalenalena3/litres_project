@@ -10,7 +10,7 @@ class BookPage:
         self._contents = browser.element('[data-testid="book__infoAboutBook--wrapper"] button[aria-haspopup="dialog"]')
         self._list_contents = browser.all('[class*="bookTableContent"][role="list"] > div')
 
-    def modal_window_visible(self):
+    def is_modal_window_visible(self):
         try:
             self._modal_windows_action.with_(timeout=10).should(be.visible)
             return True
@@ -20,12 +20,12 @@ class BookPage:
     @allure.step("Нажать на кнопку 'Добавить в корзину'")
     def add_to_cart(self):
         self._add_to_cart_button.should(be.clickable).click()
-        if self.modal_window_visible():
+        if self.is_modal_window_visible():
             self._modal_windows_action_close.should(be.clickable).click()
             self._modal_windows_action.with_(timeout=5).should(be.not_.visible)
 
     @allure.step("Проверить оглавление")
-    def should_contents(self, list_book):
+    def should_have_contents(self, list_book):
         self._contents.should(be.clickable).click()
         count_list_actual = len(self._list_contents)
         count_list_expected = len(list_book)

@@ -51,7 +51,7 @@ def test_open_contents(open_app):
     with step('Проверить оглавление'):
         list_book = load_data_json('contents_red_cow.json')
         contents = list_book['contents']
-        app_mobile.book_page_mobile.should_contents(contents)
+        app_mobile.book_page_mobile.should_have_contents(contents)
 
 
 @allure.epic("MOBILE")
