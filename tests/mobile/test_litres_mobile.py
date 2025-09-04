@@ -2,7 +2,6 @@ import allure
 from allure_commons._allure import step
 from allure_commons.types import Severity
 
-from litres_project.models.book_model import BookAttribute
 from litres_project.pages.application_mobile import app_mobile
 from litres_project.utils.resource import load_data_json
 
