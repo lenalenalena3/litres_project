@@ -8,7 +8,7 @@ class BookPage:
         self._modal_windows_action = browser.element('//*[@id="dialogDesc"]/parent::div')
         self._modal_windows_action_close = self._modal_windows_action.element('[data-testid="icon_close"]')
         self._contents = browser.element('[data-testid="book__infoAboutBook--wrapper"] button[aria-haspopup="dialog"]')
-        self._list_contents = browser.all('[class*="bookTableContent"][role="list"] > div')
+        self._actual_content = browser.all('[class*="bookTableContent"][role="list"] > div')
 
     def is_modal_window_visible(self):
         try:
@@ -25,13 +25,13 @@ class BookPage:
             self._modal_windows_action.with_(timeout=5).should(be.not_.visible)
 
     @allure.step("Проверить оглавление")
-    def should_have_contents(self, list_book):
+    def should_have_contents(self, expected_content):
         self._contents.should(be.clickable).click()
-        count_list_actual = len(self._list_contents)
-        count_list_expected = len(list_book)
-        assert count_list_actual == count_list_expected, \
-            f"Несовпадение количества строк: в интерфейсе {count_list_actual} != в файле {count_list_expected}"
-        for i in range(count_list_actual):
-            element_text = self._list_contents.element(i).get(query.text)
-            assert element_text == list_book[i], \
-                f"Несовпадение в элементе {i}: {element_text} != {list_book[i]}"
+        actual_elements_count = len(self._actual_content)
+        expected_elements_count = len(expected_content)
+        assert actual_elements_count == expected_elements_count, \
+            f"Несовпадение количества строк: в интерфейсе {actual_elements_count} != в файле {expected_elements_count}"
+        for i in range(actual_elements_count):
+            element_text = self._actual_content.element(i).get(query.text)
+            assert element_text == expected_content[i], \
+                f"Несовпадение в элементе {i}: {element_text} != {expected_content[i]}"
