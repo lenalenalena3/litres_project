@@ -1,8 +1,6 @@
 import allure
 from selene import browser
 
-from litres_project.utils.logging import cookie_attaching
-
 
 def cookie_attaching(cookies_browser):
     try:

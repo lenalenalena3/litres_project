@@ -45,25 +45,6 @@ def response_attaching(response):
         )
 
 
-def cookie_attaching(cookies_browser):
-    try:
-        cookies = {cookie['name']: cookie['value'] for cookie in cookies_browser}
-        cookies_str = "\n".join([f"{name}: {value}" for name, value in cookies.items()])
-
-        allure.attach(
-            body=cookies_str,
-            name="Session Cookies",
-            attachment_type=allure.attachment_type.TEXT,
-            extension=".txt"
-        )
-    except Exception as e:
-        allure.attach(
-            body=f"Failed to get cookies: {str(e)}",
-            name="Cookies Error",
-            attachment_type=allure.attachment_type.TEXT
-        )
-
-
 def book_attaching(book, name_file: str = "Book"):
     allure.attach(
         body=str(book),
