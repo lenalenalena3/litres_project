@@ -20,7 +20,7 @@ class FavoritePageMobile:
     @allure.step("Проверить количество книг в избранном")
     def check_books_count(self, count_book):
         try:
-            WebDriverWait(self, 10).until(
+            WebDriverWait(browser.driver, 10).until(
                 lambda _: len(self._list_favorites) == count_book
             )
         finally:

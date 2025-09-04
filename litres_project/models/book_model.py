@@ -1,5 +1,11 @@
+from enum import Enum
 from typing import Optional
 
+class BookAttribute(Enum):
+    NAME = 'name'
+    AUTHOR = 'author'
+    PRICE = 'price'
+    ID = 'id'
 
 class Book:
     def __init__(self,
@@ -23,12 +29,7 @@ class Book:
             return False
         return self.name == other.name and self.author == other.author
 
-    def equals_by_id(self, other):
+    def equals_by_attribute(self, other, attribute_name):
         if not isinstance(other, Book):
             return False
-        return self.id == other.id
-
-    def equals_by_name(self, other):
-        if not isinstance(other, Book):
-            return False
-        return self.name == other.name
+        return getattr(self, attribute_name) == getattr(other, attribute_name)

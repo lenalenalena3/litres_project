@@ -3,7 +3,7 @@ from selene import browser, be, query
 from selenium.webdriver.support.wait import WebDriverWait
 
 from litres_project.helpers.helper import extract_book_id
-from litres_project.models.book_model import Book
+from litres_project.models.book_model import Book, BookAttribute
 from litres_project.utils.logging import info_attaching
 
 
@@ -44,29 +44,22 @@ class FavoritePage:
     @allure.step("На странице 'Мои книги' проверить: количество книг ={count_book}")
     def check_books_count(self, count_book):
         try:
-            WebDriverWait(self, 10).until(
+            WebDriverWait(browser.driver, 10).until(
                 lambda _: len(self._list_favorites) == count_book
             )
         finally:
             actual_count = len(self._list_favorites)
         assert actual_count == count_book, f"Несовпадение: {actual_count} != {count_book}"
 
-    @allure.step("На странице 'Мои книги' проверить список книг по названию")
-    def should_favorite_by_name(self, count_book, list_book):
+    @allure.step("На странице 'Мои книги' проверить список книг")
+    def should_have_books(self, count_book, list_book, attribute_name: BookAttribute):
         self.check_books_count(count_book)
-        with (allure.step("Проверить названия книг")):
-            for i in range(len(list_book)):
-                actual_book = self.get_book_info(i)
-                expected_book = list_book[i]
-                assert actual_book.equals_by_name(expected_book), \
-                    f"Несовпадение в элементе {i}: {actual_book.name} != {expected_book.name}"
 
-    @allure.step("На странице 'Мои книги' проверить список книг по id")
-    def should_favorite_by_id(self, count_book, list_book):
-        self.check_books_count(count_book)
-        with (allure.step("Проверить id книг")):
-            for i in range(len(list_book)):
+        with allure.step(f"Проверить книги по {attribute_name}"):
+            for i, expected_book in enumerate(list_book):
                 actual_book = self.get_book_info(i)
-                expected_book = list_book[i]
-                assert actual_book.equals_by_id(expected_book), \
-                    f"Несовпадение в элементе {i}: {actual_book.id} != {expected_book.id}"
+
+                with allure.step(f"Проверить {attribute_name} книги {i}"):
+                    assert actual_book.equals_by_attribute(expected_book, attribute_name.value), \
+                        f"Несовпадение {attribute_name.value} в элементе {i}: " \
+                        f"{getattr(actual_book, attribute_name.value)} != {getattr(expected_book, attribute_name.value)}"

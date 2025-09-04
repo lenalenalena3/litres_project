@@ -43,7 +43,7 @@ class SearchPage:
     def should_search_by_name(self, text):
         with allure.step("Проверить, что количество строк > 0"):
             try:
-                WebDriverWait(self, 10).until(
+                WebDriverWait(browser.driver, 10).until(
                     lambda _: len(self._list_search) > 0
                 )
             finally:

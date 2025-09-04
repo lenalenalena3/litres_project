@@ -1,5 +1,7 @@
 import allure
 from allure_commons.types import Severity
+
+from litres_project.models.book_model import BookAttribute
 from litres_project.pages.application import app
 from litres_project.utils.cookie_utils import refresh_cookies
 
@@ -34,7 +36,7 @@ class TestWishlist:
         with allure.step("Проверить список 'Отложено'"):
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()
-            app.favorite_page.should_favorite_by_name(1, [book])
+            app.favorite_page.should_have_books(1, [book], BookAttribute.NAME)
 
     @allure.severity(Severity.NORMAL)
     @allure.label("owner", "Tinkalyuk")
@@ -59,9 +61,9 @@ class TestWishlist:
             list_book = []
             list_book.append(book_del)
             list_book.append(book)
-            app.favorite_page.should_favorite_by_id(2, list_book)
+            app.favorite_page.should_have_books(2, list_book, BookAttribute.ID)
         with allure.step("Удалить одну книгу"):
             index_book = 0
             app.favorite_page.delete_book_from_favorite(index_book)
         with allure.step("Проверить список 'Отложено'"):
-            app.favorite_page.should_favorite_by_id(1, [book])
+            app.favorite_page.should_have_books(1, [book], BookAttribute.ID)
