@@ -1,10 +1,8 @@
 import allure
 from selene import browser, have, be, query
-from selenium.common import TimeoutException
-from selenium.webdriver.support.wait import WebDriverWait
 from pytest_check import check
 
-from litres_project.utils.logging import info_attaching, current_url_attaching, cookie_attaching
+from litres_project.utils.logging import info_attaching, current_url_attaching
 
 
 class MenuPage:
@@ -105,35 +103,3 @@ class MenuPage:
     @allure.step("На главной странице в строку поиска ввести {text}")
     def search_text(self, text):
         self._search_input.should(be.visible).type(text).press_enter()
-
-    @allure.step("Обновить cookies")
-    def refresh_cookies(self, session):
-        with allure.step(f"Session Cookies old"):
-            cookie_attaching(browser.driver.get_cookies())
-        browser.driver.delete_all_cookies()
-        for name, value in session.cookies.get_dict().items():
-            browser.driver.add_cookie({
-                'name': name,
-                'value': value,
-                'domain': 'litres.ru',
-                'path': '/',
-                'secure': True
-            })
-        browser.driver.refresh()
-        with allure.step(f"Session Cookies new"):
-            cookie_attaching(browser.driver.get_cookies())
-
-    def tab_more_one(self):
-        try:
-            WebDriverWait(browser.driver, 5).until(
-                lambda d: len(d.window_handles) > 1
-            )
-            return True
-        except TimeoutException:
-            return False
-
-    @allure.step("Переключиться на новую вкладку")
-    def switch_tab(self):
-        if self.tab_more_one():
-            current_handles = browser.driver.window_handles
-            browser.driver.switch_to.window(current_handles[-1])

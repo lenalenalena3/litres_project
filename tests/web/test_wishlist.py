@@ -1,6 +1,7 @@
 import allure
 from allure_commons.types import Severity
 from litres_project.pages.application import app
+from litres_project.utils.cookie_utils import refresh_cookies
 
 
 @allure.epic("WEB")
@@ -50,7 +51,7 @@ class TestWishlist:
         with allure.step("Открыть главную страницу"):
             session, book, book_del = api_session_add_wishlist
             app.menu_page.open_main_page()
-            app.menu_page.refresh_cookies(session)
+            refresh_cookies(session)
         with allure.step("Открыть список 'Отложено'"):
             app.menu_page.open_my_books()
             app.favorite_page.open_favorite()

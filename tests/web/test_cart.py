@@ -1,6 +1,8 @@
 import allure
 from allure_commons.types import Severity
 from litres_project.pages.application import app
+from litres_project.utils.cookie_utils import refresh_cookies
+from litres_project.utils.tab_utils import switch_tab
 
 
 @allure.epic("WEB")
@@ -29,7 +31,7 @@ class TestCart:
         with allure.step("Добавить книгу в корзину"):
             index_book = 0
             book = app.search_page.open_info_book(index_book)
-            app.menu_page.switch_tab()
+            switch_tab()
             app.book_page.add_to_cart()
         with allure.step("Проверить корзину"):
             app.menu_page.open_cart()
@@ -50,7 +52,7 @@ class TestCart:
         with allure.step("Открыть главную страницу"):
             session, book_del, book = api_session_add_cart
             app.menu_page.open_main_page()
-            app.menu_page.refresh_cookies(session)
+            refresh_cookies(session)
         with allure.step("Открыть корзину"):
             app.menu_page.open_cart()
         with allure.step("Проверить корзину"):
