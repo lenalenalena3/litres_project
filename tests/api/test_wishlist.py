@@ -24,7 +24,7 @@ class TestWishlist:
             id_book = '65841173'
             book = Book(id=id_book)
             book_attaching(book, "Book")
-            response = helper_api.api_put_wishlist(api_session, book.id)
+            response = helper_api.put_wishlist(api_session, book.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 204)
 
@@ -41,7 +41,7 @@ class TestWishlist:
         session, id_book_del = api_session_add_wishlist
         with allure.step("Отправить запрос DELETE_wishlist"):
             book_attaching(id_book_del, "Book_del")
-            response = helper_api.api_delete_wishlist(session, id_book_del.id)
+            response = helper_api.delete_wishlist(session, id_book_del.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 204)
 
@@ -58,6 +58,6 @@ class TestWishlist:
         with allure.step("Отправить запрос DELETE_wishlist"):
             id_book = '12345678'
             book = Book(id=id_book)
-            response = helper_api.api_delete_wishlist(api_session, book.id)
+            response = helper_api.delete_wishlist(api_session, book.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 404)

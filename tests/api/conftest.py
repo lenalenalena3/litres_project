@@ -48,7 +48,7 @@ def api_session():
 def api_session_add_wishlist(api_session, helper_api):
     book = Book(id='65841173')
     book_attaching(book, "Book")
-    helper_api.api_put_wishlist(api_session, book.id)
+    helper_api.put_wishlist(api_session, book.id)
     yield api_session, book
     api_session.close()
 
@@ -57,7 +57,7 @@ def api_session_add_wishlist(api_session, helper_api):
 def api_session_add_cart(api_session, helper_api):
     book = Book(id='65841173')
     book_attaching(book, "Book")
-    helper_api.api_put_cart_add(api_session, book.id)
+    helper_api.put_cart_add(api_session, book.id)
     yield api_session, book
     api_session.close()
 

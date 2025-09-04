@@ -23,7 +23,7 @@ class TestCart:
         with allure.step("Отправить запрос PUT_cart_add"):
             id_book = '65841173'
             book = Book(id=id_book)
-            response = helper_api.api_put_cart_add(api_session, book.id)
+            response = helper_api.put_cart_add(api_session, book.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 200)
             helper_api.validate_schema(response, 'put_add_cart.json')
@@ -44,6 +44,6 @@ class TestCart:
     def test_api_put_cart_remove(self, api_session_add_cart, helper_api):
         session, book = api_session_add_cart
         with allure.step("Отправить запрос PUT_cart_remove"):
-            response = helper_api.api_put_cart_remove(session, book.id)
+            response = helper_api.put_cart_remove(session, book.id)
         with allure.step("Проверить ответ"):
             helper_api.check_status_code(response, 204)

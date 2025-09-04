@@ -14,7 +14,7 @@ class APIHelper:
         self._base_url_api = value
 
     @allure.step("api_request")
-    def api_request(self, session, endpoint, method, payload=None, params=None):
+    def request(self, session, endpoint, method, payload=None, params=None):
         url = f"{self._base_url_api}{endpoint}"
         method = method.upper()
         headers = {"Content-Type": "application/json"}
@@ -49,27 +49,27 @@ class APIHelper:
             f"Ожидалось status_code == {status_code}, получено {response.status_code}")
 
     @allure.step("PUT: wishlist для {id_book}")
-    def api_put_wishlist(self, session, id_book):
+    def put_wishlist(self, session, id_book):
         endpoint = f"/wishlist/arts/{id_book}"
-        response = self.api_request(session=session, endpoint=endpoint, method="PUT")
+        response = self.request(session=session, endpoint=endpoint, method="PUT")
         return response
 
     @allure.step("DELETE: wishlist для {id_book}")
-    def api_delete_wishlist(self, session, id_book):
+    def delete_wishlist(self, session, id_book):
         endpoint = f"/wishlist/arts/{id_book}"
-        response = self.api_request(session=session, endpoint=endpoint, method="DELETE")
+        response = self.request(session=session, endpoint=endpoint, method="DELETE")
         return response
 
     @allure.step("PUT: cart add для {id_book}")
-    def api_put_cart_add(self, session, id_book):
+    def put_cart_add(self, session, id_book):
         endpoint = f"/cart/arts/add"
         payload = {"art_ids": [id_book]}
-        response = self.api_request(session=session, endpoint=endpoint, method="PUT", payload=payload)
+        response = self.request(session=session, endpoint=endpoint, method="PUT", payload=payload)
         return response
 
     @allure.step("PUT: cart remove для {id_book}")
-    def api_put_cart_remove(self, session, id_book):
+    def put_cart_remove(self, session, id_book):
         endpoint = f"/cart/arts/remove"
         payload = {"art_ids": [id_book]}
-        response = self.api_request(session=session, endpoint=endpoint, method="PUT", payload=payload)
+        response = self.request(session=session, endpoint=endpoint, method="PUT", payload=payload)
         return response

@@ -22,7 +22,7 @@ def test_api_get_suggestions(api_session, helper_api):
         text = 'сказки'
         endpoint = f"/search/suggestions"
         params = {'q': text}
-        response = helper_api.api_request(session=api_session, endpoint=endpoint, method="GET", params=params)
+        response = helper_api.request(session=api_session, endpoint=endpoint, method="GET", params=params)
     with allure.step("Проверить ответ"):
         helper_api.check_status_code(response, 200)
         helper_api.validate_schema(response, 'get_list_suggestions.json')

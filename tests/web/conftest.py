@@ -137,10 +137,10 @@ def api_session_add_wishlist(api_session, helper_api):
     book_attaching(book1, "Book1")
     book_attaching(book2, "Book2")
 
-    response_book1 = helper_api.api_put_wishlist(api_session, book1.id)
+    response_book1 = helper_api.put_wishlist(api_session, book1.id)
     helper_api.check_status_code(response_book1, 204)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки
-    response_book2 = helper_api.api_put_wishlist(api_session, book2.id)
+    response_book2 = helper_api.put_wishlist(api_session, book2.id)
     helper_api.check_status_code(response_book2, 204)
     yield api_session, book1, book2
 
@@ -152,9 +152,9 @@ def api_session_add_cart(api_session, helper_api):
     book_attaching(book1, "Book1")
     book_attaching(book2, "Book2")
 
-    response_book1 = helper_api.api_put_cart_add(api_session, book1.id)
+    response_book1 = helper_api.put_cart_add(api_session, book1.id)
     helper_api.check_status_code(response_book1, 200)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки
-    response_book2 = helper_api.api_put_cart_add(api_session, book2.id)
+    response_book2 = helper_api.put_cart_add(api_session, book2.id)
     helper_api.check_status_code(response_book2, 200)
     yield api_session, book1, book2
