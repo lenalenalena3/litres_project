@@ -11,10 +11,9 @@ from selenium import webdriver
 
 import pytest
 
+from litres_project.helpers.helper import create_books
 from litres_project.helpers.helper_api import APIHelper
-from litres_project.models.book_model import Book
 from litres_project.utils import attach
-from litres_project.utils.logging import book_attaching
 from litres_project.utils.resource import load_data_json_value, abs_path_from_project
 from tests.web import config
 
@@ -129,14 +128,13 @@ def helper_api(context):
     helper.set_base_url_api(settings.BASE_URL_API)
     return helper
 
+@pytest.fixture
+def two_books():
+    return create_books(['66924193', '65841173'])
 
 @pytest.fixture(scope="function")
-def api_session_add_wishlist(api_session, helper_api):
-    book1 = Book(id='66924193')
-    book2 = Book(id='65841173')
-    book_attaching(book1, "Book1")
-    book_attaching(book2, "Book2")
-
+def api_session_add_wishlist(api_session, helper_api, two_books):
+    book1, book2 = two_books
     response_book1 = helper_api.put_wishlist(api_session, book1.id)
     helper_api.check_status_code(response_book1, 204)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки
@@ -146,12 +144,8 @@ def api_session_add_wishlist(api_session, helper_api):
 
 
 @pytest.fixture(scope="function")
-def api_session_add_cart(api_session, helper_api):
-    book1 = Book(id='66924193')
-    book2 = Book(id='65841173')
-    book_attaching(book1, "Book1")
-    book_attaching(book2, "Book2")
-
+def api_session_add_cart(api_session, helper_api, two_books):
+    book1, book2 = two_books
     response_book1 = helper_api.put_cart_add(api_session, book1.id)
     helper_api.check_status_code(response_book1, 200)
     time.sleep(20)  # Добавлено специально, чтобы избежать блокировки

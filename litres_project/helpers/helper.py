@@ -1,5 +1,8 @@
 import allure
 
+from litres_project.models.book_model import Book
+from litres_project.utils.logging import book_attaching
+
 
 def extract_book_id(url):
     if not url:
@@ -22,3 +25,11 @@ def verify_response_text(json_text, text):
             return False
     print(f'Все тексты содержат слово "{text}"')
     return True
+
+def create_books(book_ids):
+    books = []
+    for i, book_id in enumerate(book_ids, 1):
+        book = Book(id=book_id)
+        book_attaching(book, f"Book{i}")
+        books.append(book)
+    return books
